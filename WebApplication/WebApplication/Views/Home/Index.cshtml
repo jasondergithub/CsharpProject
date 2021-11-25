@@ -1,0 +1,116 @@
+﻿@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 text-center">
+            <h1>振興醫院新品入庫系統</h1>
+            <hr />
+        </div>
+        <div class="col-md-4  text-center">
+            <div class="card">
+                <div class="card-header b-blue">
+                    <h2>廠商</h2>
+                    <img src="~/img/man.png" with="10" heigh="10" alt="廠商" class="img">
+                </div>
+                <div class="card-body b-blue">
+                    <br>
+                    <button type="button" class="btn-lg text-dark centralBtn" title="進入中文版" onclick="location.href='@Url.Action("CompanyLogin" ,"Home")'" ;" code="1" style="font-weight:bold">
+                        <sapn class="display-6 font-weight-bolder">進入登入頁面</sapn>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4  text-center">
+            <div class="card">
+                <div class="card-header b-green">
+                    <h2>院方一般人員</h2>
+                    <img src="~/img/medical-team.png" with="10" heigh="10" alt="院方人員" class="img">
+                </div>
+                <div class="card-body b-green">
+                    <br>
+                    <button type="button" class="btn-lg text-dark centralBtn" title="進入中文版" onclick="location.href='@Url.Action("StaffLogin" ,"Home")'" code="1" style="font-weight:bold">
+                        <sapn class="display-6 font-weight-bolder">進入登入頁面</sapn>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4  text-center">
+            <div class="card">
+                <div class="card-header b-red">
+                    <h2>資材室</h2>
+                    <img src="~/img/woman.png" with="10" heigh="10" alt="資材室" class="img">
+                </div>
+                <div class="card-body b-red">
+                    <br>
+                    <button type="button" class="btn-lg text-dark centralBtn" title="進入中文版" onclick="location.href='@Url.Action("AdminLogin" ,"Home")'" code="1" style="font-weight:bold">
+                        <sapn class="display-6 font-weight-bolder">進入登入頁面</sapn>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+<style>
+    body {
+        font-family: "微軟正黑體", "Microsoft JhengHei", "Segoe UI Semibold", "Segoe UI", "Lucida Grande" !important;
+    }
+
+    .card-header.b-blue {
+        border-top: 10px solid #0094ff;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+
+    .card-body.b-blue {
+        background-color: #0094ff;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .card-header.b-green {
+        border-top: 10px solid #145514;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+
+    .card-body.b-green {
+        background-color: #145514;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .card-header.b-red {
+        border-top: 10px solid #de4a4a;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+
+    .card-body.b-red {
+        background-color: #de4a4a;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .card {
+        background-color: #f0f0f0;
+    }
+
+    .centralBtn {
+        margin-bottom: 20px;
+    }
+
+    .img {
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+
+    h1, h2 {
+        font-weight: 900;
+    }
+
+    .row{
+        margin-top:50px;
+    }
+</style>

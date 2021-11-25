@@ -1,0 +1,56 @@
+﻿@model WebApplication.ViewModels.MembersLoginViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6 text-center">
+            <div class="form-horizontal">
+                <h2 class="title">登入</h2>
+                <hr />
+
+                <div class="form-group center-block">
+
+                    @Html.LabelFor(model => model.companyId, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.companyId, new { htmlAttributes = new { @class = "form-control input-lg center-block" } })
+                        @Html.ValidationMessageFor(model => model.companyId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group center-block">
+                    @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control input-lg center-block" } })
+                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger text-center center-block" })
+                <div class="form-group">
+                    <input type="submit" class="btn-success btn-primary btn-lg center-block" value="登入" style=" font-weight:bold;" />
+                    <hr>
+                    <!--<p>還沒有帳號嗎?<a href="">帳號申請</a></p>-->
+                    <p>還沒有帳號嗎? @Html.ActionLink("帳號申請", "Register", "Member")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<style>
+    .row {
+        margin-top: 70px;
+    }
+    .col-md-offset-3 {
+        border-top: 50px solid #145514;
+        border-bottom: 50px solid #145514;
+        border-radius: 50px;
+        box-shadow: 6px 6px 6px rgba(0,0,0,.5);
+    }
+
+    .title {
+        font-weight: 900;
+    }
+</style>
+
+

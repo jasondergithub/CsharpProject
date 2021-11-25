@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "~/Views/Shared/Company_Layout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-offset-3 col-md-6 text-center">
+
+        <button type="button" class="button" onclick="location.href='@Url.Action("CreateProject" ,"HospitalStaff")'">功能測試一</button>
+        <button type="button" class="button" onclick="location.href='@Url.Action("Index" ,"HospitalStaff")'">功能測試二</button>
+        <button type="button" class="button" onclick="location.href='@Url.Action("Index" ,"Home")'">功能測試三</button>
+        <button type="button" class="button" onclick="location.href='@Url.Action("Index" ,"Home")'">功能測試四</button>
+        <!-- btn-success btn-primary btn-lg center-block-->
+
+    </div>
+</div>
+<style>
+    button {
+        font-family: 'Ubuntu', sans-serif;
+        width: 400px;
+        height: 70px;
+        line-height: 1;
+        font-size: 22px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        border: 3px solid #145514;
+        background: #fff;
+        color: #145514;
+        border-radius: 40px;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all .35s;
+        margin-top: 50px;
+    }
+
+        button:hover {
+            background: #145514;
+            color: #fff;
+        }
+
+        button span {
+            opacity: 1;
+            visibility: visible;
+            transition: all .35s;
+        }
+
+    .success {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        border-radius: 50%;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .35s;
+    }
+
+        .success svg {
+            width: 20px;
+            height: 20px;
+            fill: yellowgreen;
+            transform-origin: 50% 50%;
+            transform: translateY(-50%) rotate(0deg) scale(0);
+            transition: all .35s;
+        }
+
+    button.is_active {
+        width: 40px;
+        height: 40px;
+    }
+
+        button.is_active .success {
+            opacity: 1;
+            visibility: visible;
+        }
+
+            button.is_active .success svg {
+                margin-top: 50%;
+                transform: translateY(-50%) rotate(720deg) scale(1);
+            }
+
+        button.is_active span {
+            opacity: 0;
+            visibility: hidden;
+        }
+</style>
+<script>
+    let btn = document.querySelector("button");
+
+    btn.addEventListener("click", active);
+
+    function active() {
+        btn.classList.toggle("is_active");
+    }
+</script>
