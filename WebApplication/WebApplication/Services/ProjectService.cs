@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using WebApplication.Models;
 
 namespace WebApplication.Services
@@ -42,6 +44,28 @@ namespace WebApplication.Services
             }
 
         }
+        public List<SelectListItem> getCompanyName(List<SelectListItem> mySelectItemList)
+        {
+            List<string> result = new List<string>();
 
+            SqlConnection sqlConnection = new SqlConnection();
+            sqlConnection.ConnectionString = connStr;
+            DataSet ds = new DataSet();
+            SqlDataAdapter daCompany = new SqlDataAdapter("SELECT DISTINCT companyName FROM Company", sqlConnection);
+            daCompany.Fill(ds);
+            DataTable dt = ds.Tables [0];
+
+            for(int i=0; i<dt.Rows.Count; i++)
+            {
+                mySelectItemList.Add(new SelectListItem()
+                {
+                    Text = (string)dt.Rows[i][0],
+                    Value = (string)dt.Rows[i][0],
+                    Selected = false
+                }) ;
+            }
+
+            return mySelectItemList;
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace WebApplication.Models
 {
@@ -20,6 +21,9 @@ namespace WebApplication.Models
         public bool checkAB { get; set; }
 
         public bool judgeState { get; set; }
+
+        //[DisplayName("選擇廠商")]
+        //public string companyId { get; set; }
 
 
 

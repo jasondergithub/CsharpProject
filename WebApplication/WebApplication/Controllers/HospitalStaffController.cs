@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication.Services;
 using WebApplication.ViewModels;
-
+using WebApplication.Models;
+using System.Configuration;
 
 namespace WebApplication.Controllers
 {
@@ -20,13 +21,18 @@ namespace WebApplication.Controllers
         
         public ActionResult CreateProject()
         {
-            return View();
+            List<SelectListItem> mySelectItemList = new List<SelectListItem>();
+            CreateProject model = new CreateProject()
+            {
+                companyNameList = projectService.getCompanyName(mySelectItemList)
+            };
+            return View(model);
         }
         [HttpPost]
-        public ActionResult CreateProject(CreateProject newProject)
+        public ActionResult CreateProject(Project project)
         {
-            projectService.Createroject(newProject.project);
-            
+            //projectService.Createroject(newProject.project);
+
             return View();
         }
     }
