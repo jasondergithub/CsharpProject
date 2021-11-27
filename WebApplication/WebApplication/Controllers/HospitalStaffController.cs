@@ -21,17 +21,24 @@ namespace WebApplication.Controllers
         
         public ActionResult CreateProject()
         {
-            List<SelectListItem> mySelectItemList = new List<SelectListItem>();
-            CreateProject model = new CreateProject()
-            {
-                companyNameList = projectService.getCompanyName(mySelectItemList)
-            };
-            return View(model);
+            var drop_down = new List<string>();
+            drop_down = projectService.getCompanyName();
+            ViewBag.drop_list = drop_down;
+
+            return View();
         }
         [HttpPost]
-        public ActionResult CreateProject(Project project)
+        public ActionResult CreateProject(CreateProject newProject)
         {
-            //projectService.Createroject(newProject.project);
+            if (ModelState.IsValid)
+            {
+                projectService.Createproject(newProject.project, newProject.Name);
+                //return RedirectToAction();
+            }
+
+            var drop_down = new List<string>();
+            drop_down = projectService.getCompanyName();
+            ViewBag.drop_list = drop_down;
 
             return View();
         }
