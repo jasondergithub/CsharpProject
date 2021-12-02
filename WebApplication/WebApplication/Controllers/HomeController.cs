@@ -68,42 +68,58 @@ namespace WebApplication.Controllers
         {
             ViewBag.accountExist = false;
             ViewBag.DirCreateSucc = false;
+            ViewBag.notEnoughPhoto = false;
             return View();
         }
         [HttpPost]
         public ActionResult Register(MembersRegisterViewModel RegisterMember, HttpPostedFileBase[] photos)
         {
-            //新建Members, 
-            Members newMember = new Members();
-            newMember.companyName = RegisterMember.newMember.companyName;
-            newMember.companyId = RegisterMember.newMember.companyId;                             //帳號
-            newMember.password = RegisterMember.newMember.password;
-            newMember.companyLeader = RegisterMember.newMember.companyLeader;
-            newMember.companyAddress = RegisterMember.newMember.companyAddress;
-            newMember.fax = RegisterMember.newMember.fax;
-            newMember.telephone = RegisterMember.newMember.telephone;
-            newMember.email1 = RegisterMember.newMember.email1;
 
-            //呼叫MemberDBService.cs中的Register創建公司資料表
-            ViewBag.accountExist = membersDBServices.Register(newMember);
-            // 呼叫createDirectory.cs 中的createDir 創建資料夾
-            ViewBag.DirCreateSucc = createDirectory.createDir(newMember.companyId);
-            //建立公司(統編)資料夾下的三個資料夾 (1->販售許可(sp),  2->3個月(3m),  3->公司證(cp))
-            List<string> myStringLists = new List<string>();
-            myStringLists.Add("sp");
-            myStringLists.Add("3m");
-            myStringLists.Add("cp");
-            foreach (string i in myStringLists)
+            if (ModelState.IsValid)
             {
-                string subDirName = newMember.companyId + "/" + i;
-                ViewBag.DirCreateSucc = createDirectory.createDir(subDirName);
-            }
+                if (photos[0] == null || photos[1] == null || photos[2] == null)
+                {
+                    ViewBag.notEnoughPhoto = true;
+                    ViewBag.accountExist = false;
+                    ViewBag.DirCreateSucc = false;
+                }
+                else
+                {
+                    ViewBag.notEnoughPhoto = false;
+                    //新建Members, 
+                    Members newMember = new Members();
+                    newMember.companyName = RegisterMember.newMember.companyName;
+                    newMember.companyId = RegisterMember.newMember.companyId;                             //帳號
+                    newMember.password = RegisterMember.newMember.password;
+                    newMember.companyLeader = RegisterMember.newMember.companyLeader;
+                    newMember.companyAddress = RegisterMember.newMember.companyAddress;
+                    newMember.fax = RegisterMember.newMember.fax;
+                    newMember.telephone = RegisterMember.newMember.telephone;
+                    newMember.email1 = RegisterMember.newMember.email1;
 
-            for (int order = 0; order <= 2; order++)
-            {
-                HttpPostedFileBase f = (HttpPostedFileBase)photos[order];
-                uploadObject.UploadToFtp(f, newMember.companyId, order + 1);
+                    //呼叫MemberDBService.cs中的Register創建公司資料表
+                    ViewBag.accountExist = membersDBServices.Register(newMember);
+                    // 呼叫createDirectory.cs 中的createDir 創建資料夾
+                    ViewBag.DirCreateSucc = createDirectory.createDir(newMember.companyId);
+                    //建立公司(統編)資料夾下的三個資料夾 (1->販售許可(sp),  2->3個月(3m),  3->公司證(cp))
+                    List<string> myStringLists = new List<string>();
+                    myStringLists.Add("sp");
+                    myStringLists.Add("3m");
+                    myStringLists.Add("cp");
+                    foreach (string i in myStringLists)
+                    {
+                        string subDirName = newMember.companyId + "/" + i;
+                        ViewBag.DirCreateSucc = createDirectory.createDir(subDirName);
+                    }
+
+                    for (int order = 0; order <= 2; order++)
+                    {
+                        HttpPostedFileBase f = (HttpPostedFileBase)photos[order];
+                        uploadObject.UploadToFtp(f, newMember.companyId, order + 1);
+                    }
+                }
             }
+                       
             return View();
         }
         public ActionResult RegisterResult()

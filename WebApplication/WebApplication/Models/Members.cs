@@ -40,24 +40,24 @@ namespace WebApplication.Models
         [DisplayName("聯絡電話")]
         [Required(ErrorMessage = "請輸入聯絡電話")]
         public string telephone { get; set; }
-        [DisplayName("Email")]
+        [DisplayName("Email1")]
         [StringLength(200, ErrorMessage = "Email長度最多200字元")]
         [Required(ErrorMessage = "請輸入Email")]
         [EmailAddress(ErrorMessage = "這不是Email格式")]
         public string email1 { get; set; }
-        [DisplayName("Email")]
+        [DisplayName("Email2")]
         [StringLength(200, ErrorMessage = "Email長度最多200字元")]
         [EmailAddress(ErrorMessage = "這不是Email格式")]
         public string email2 { get; set; }
-        [DisplayName("Email")]
+        [DisplayName("Email3")]
         [StringLength(200, ErrorMessage = "Email長度最多200字元")]
         [EmailAddress(ErrorMessage = "這不是Email格式")]
         public string email3 { get; set; }
-        [DisplayName("Email")]
+        [DisplayName("Email4")]
         [StringLength(200, ErrorMessage = "Email長度最多200字元")]
         [EmailAddress(ErrorMessage = "這不是Email格式")]
         public string email4 { get; set; }
-        [DisplayName("Email")]
+        [DisplayName("Email5")]
         [StringLength(200, ErrorMessage = "Email長度最多200字元")]
         [EmailAddress(ErrorMessage = "這不是Email格式")]
         public string email5 { get; set; }

@@ -105,8 +105,18 @@ namespace WebApplication.Services
             //conn.ConnectionString = connStr;
             SqlCommand cmd = new SqlCommand(
             @" INSERT INTO Company (password, companyName, companyId, companyLeader,
-                                            companyAddress, fax, telephone, email1 )VALUES( @password,@companyName, @companyId, @companyLeader,
-                                            @companyAddress, @fax, @telephone, @email1 )");
+                                            companyAddress, fax, telephone, email1,  email2, email3, email4, email5)VALUES( @password,@companyName, @companyId, @companyLeader,
+                                            @companyAddress, @fax, @telephone, @email1,  @email2, @email3, @email4, @email5)");
+
+            if (newMember.email2 == null)
+                newMember.email2 = "";
+            if (newMember.email3 == null)
+                newMember.email3 = "";
+            if (newMember.email4 == null)
+                newMember.email4 = "";
+            if (newMember.email5 == null)
+                newMember.email5 = "";
+
             //將密碼Hash過
             newMember.password = HashPassWord(newMember.password);
             //需完成寫入sql database
@@ -119,6 +129,10 @@ namespace WebApplication.Services
             cmd.Parameters.Add(new SqlParameter("@fax", newMember.fax));
             cmd.Parameters.Add(new SqlParameter("@telephone", newMember.telephone));
             cmd.Parameters.Add(new SqlParameter("@email1", newMember.email1));
+            cmd.Parameters.Add(new SqlParameter("@email2", newMember.email2));
+            cmd.Parameters.Add(new SqlParameter("@email3", newMember.email3));
+            cmd.Parameters.Add(new SqlParameter("@email4", newMember.email4));
+            cmd.Parameters.Add(new SqlParameter("@email5", newMember.email5));
 
             //確保程式不會因執行錯誤而整個中斷
             try
