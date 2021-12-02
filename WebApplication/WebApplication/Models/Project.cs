@@ -17,13 +17,13 @@ namespace WebApplication.Models
         public string season { get; set; }
         public string department { get; set; }
         public string hospitalUser { get; set; }
-        public string projectNo { get; set; }
+        public int projectNo { get; set; }
         public bool checkAB { get; set; }
 
         public bool judgeState { get; set; }
 
         //[DisplayName("選擇廠商")]
-        //public string companyId { get; set; }
+        public string companyId { get; set; }
 
 
 
