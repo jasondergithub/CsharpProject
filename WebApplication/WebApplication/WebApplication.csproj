@@ -126,13 +126,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CheckList.cs" />
     <Compile Include="Models\Members.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CheckDBList.cs" />
     <Compile Include="Services\createDirectory.cs" />
     <Compile Include="Services\MembersDBService.cs" />
     <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Services\uploadFileService.cs" />
+    <Compile Include="ViewModels\CheckListViewModel.cs" />
     <Compile Include="ViewModels\CreateProject.cs" />
     <Compile Include="ViewModels\MembersLoginViewModel.cs" />
     <Compile Include="ViewModels\MembersRegisterViewModel.cs" />
@@ -161,6 +164,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Views\HospitalStaff\CreateProject.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\CompanyStaff\CheckList.cshtml" />
     <None Include="Views\HospitalStaff\index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

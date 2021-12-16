@@ -35,6 +35,7 @@
             @Html.ValidationMessageFor(model => model.project.projectGenre, "", new { @class = "text-danger" })
         </div>
     </div>
+    
     <div class="form-group">
         @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
         @Html.DropDownListFor(model => model.Name, new SelectList(ViewBag.drop_list), "選擇廠商名稱", htmlAttributes: new { @class = "form-control" })
