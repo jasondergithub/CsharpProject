@@ -100,23 +100,30 @@ namespace WebApplication.Controllers
                     //呼叫MemberDBService.cs中的Register創建公司資料表
                     ViewBag.accountExist = membersDBServices.Register(newMember);
                     // 呼叫createDirectory.cs 中的createDir 創建資料夾
-                    ViewBag.DirCreateSucc = createDirectory.createDir(newMember.companyId);
-                    //建立公司(統編)資料夾下的三個資料夾 (1->販售許可(sp),  2->3個月(3m),  3->公司證(cp))
-                    List<string> myStringLists = new List<string>();
-                    myStringLists.Add("sp");
-                    myStringLists.Add("3m");
-                    myStringLists.Add("cp");
-                    foreach (string i in myStringLists)
+                    if (!ViewBag.accountExist) 
                     {
-                        string subDirName = newMember.companyId + "/" + i;
-                        ViewBag.DirCreateSucc = createDirectory.createDir(subDirName);
+                        ViewBag.DirCreateSucc = createDirectory.createDir(newMember.companyId);
+                        //建立公司(統編)資料夾下的三個資料夾 (1->販售許可(sp),  2->3個月(3m),  3->公司證(cp))
+                        List<string> myStringLists = new List<string>();
+                        myStringLists.Add("sp");
+                        myStringLists.Add("3m");
+                        myStringLists.Add("cp");
+                        foreach (string i in myStringLists)
+                        {
+                            string subDirName = newMember.companyId + "/" + i;
+                            ViewBag.DirCreateSucc = createDirectory.createDir(subDirName);
+                        }
+                        for (int order = 0; order <= 2; order++)
+                        {
+                            HttpPostedFileBase f = (HttpPostedFileBase)photos[order];
+                            uploadObject.UploadToFtp(f, newMember.companyId, order + 1);
+                        }
+                    }
+                    else 
+                    {
+                        ViewBag.DirCreateSucc = false;
                     }
 
-                    for (int order = 0; order <= 2; order++)
-                    {
-                        HttpPostedFileBase f = (HttpPostedFileBase)photos[order];
-                        uploadObject.UploadToFtp(f, newMember.companyId, order + 1);
-                    }
                 }
             }
                        

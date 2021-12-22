@@ -13,10 +13,8 @@ namespace WebApplication.Services
         {
             try
             {
-
                 //string dirName = "CreateDirTest";
                 WebRequest request = WebRequest.Create("ftp://140.124.183.13/" + dirName);
-
                 request.Method = WebRequestMethods.Ftp.MakeDirectory;
                 request.Credentials = new NetworkCredential("ftpuser", "wiki1424");
                 using (var resp = (FtpWebResponse)request.GetResponse())
@@ -27,10 +25,10 @@ namespace WebApplication.Services
             }
             catch (Exception ex)
             {
+                return false;
                 throw new Exception(ex.Message);
-                //return false;
             }
-            return false;
+            //return false;
         }
     }
 }

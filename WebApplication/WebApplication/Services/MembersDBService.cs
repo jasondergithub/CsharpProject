@@ -99,7 +99,7 @@ namespace WebApplication.Services
         }
         public bool Register(Members newMember)
         {
-            bool accountExist = true;
+            bool accountExist = false;
             SqlConnection conn = new SqlConnection(connStr);
             //SqlConnection conn = new SqlConnection();
             //conn.ConnectionString = connStr;
@@ -107,7 +107,6 @@ namespace WebApplication.Services
             @" INSERT INTO Company (password, companyName, companyId, companyLeader,
                                             companyAddress, fax, telephone, email1,  email2, email3, email4, email5)VALUES( @password,@companyName, @companyId, @companyLeader,
                                             @companyAddress, @fax, @telephone, @email1,  @email2, @email3, @email4, @email5)");
-
             if (newMember.email2 == null)
                 newMember.email2 = "";
             if (newMember.email3 == null)
@@ -116,7 +115,6 @@ namespace WebApplication.Services
                 newMember.email4 = "";
             if (newMember.email5 == null)
                 newMember.email5 = "";
-
             //將密碼Hash過
             newMember.password = HashPassWord(newMember.password);
             //需完成寫入sql database
@@ -133,7 +131,6 @@ namespace WebApplication.Services
             cmd.Parameters.Add(new SqlParameter("@email3", newMember.email3));
             cmd.Parameters.Add(new SqlParameter("@email4", newMember.email4));
             cmd.Parameters.Add(new SqlParameter("@email5", newMember.email5));
-
             //確保程式不會因執行錯誤而整個中斷
             try
             {
@@ -141,7 +138,6 @@ namespace WebApplication.Services
                 conn.Open();
                 //執行Sql指令
                 cmd.ExecuteNonQuery();
-
             }
             catch // (Exception e)
             {
@@ -159,47 +155,47 @@ namespace WebApplication.Services
 
 
         #region 帳號註冊重複確認
-        public string AccountCheck(string companyId)
-        {
-            //取得帳號
-            string result = GetDataById(companyId);
-            //宣告驗證後訊息字串
-            //bool result = (Data == null);
-            return result;
-        }
+        //public string AccountCheck(string companyId)
+        //{
+        //    //取得帳號
+        //    string result = GetDataById(companyId);
+        //    //宣告驗證後訊息字串
+        //    //bool result = (Data == null);
+        //    return result;
+        //}
 
 
-        public string GetDataById(string companyId)
-        {
-            // Members Data = new Members();
-            string account = "";
-            SqlConnection conn = new SqlConnection(connStr);
-            //SqlConnection conn = new SqlConnection();
-            //conn.ConnectionString = connStr;
-            string commandStr = "SELECT * FROM company WHERE companyId = @companyId";
-            SqlCommand sqlCommand = new SqlCommand(commandStr);
-            sqlCommand.Connection = conn;
-            sqlCommand.Parameters.Add(new SqlParameter("@companyId", companyId));
-            try
-            {
-                conn.Open();
-                SqlDataReader reader = sqlCommand.ExecuteReader();
-                reader.Read();
-                account = reader["companyId"].ToString();
-            }
-            catch
-            {
-                //查無資料
-                account = "";
-            }
-            finally
-            {
-                conn.Close();
-            }
-            //throw new NotImplementedException();
-            return account;
-        }
+        //public string GetDataById(string companyId)
+        //{
+        //    // Members Data = new Members();
+        //    string account = "";
+        //    SqlConnection conn = new SqlConnection(connStr);
+        //    //SqlConnection conn = new SqlConnection();
+        //    //conn.ConnectionString = connStr;
+        //    string commandStr = "SELECT * FROM company WHERE companyId = @companyId";
+        //    SqlCommand sqlCommand = new SqlCommand(commandStr);
+        //    sqlCommand.Connection = conn;
+        //    sqlCommand.Parameters.Add(new SqlParameter("@companyId", companyId));
+        //    try
+        //    {
+        //        conn.Open();
+        //        SqlDataReader reader = sqlCommand.ExecuteReader();
+        //        reader.Read();
+        //        account = reader["companyId"].ToString();
+        //    }
+        //    catch
+        //    {
+        //        //查無資料
+        //        account = "";
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
+        //    //throw new NotImplementedException();
+        //    return account;
+        //}
+        #endregion
     }
 
 }
-#endregion

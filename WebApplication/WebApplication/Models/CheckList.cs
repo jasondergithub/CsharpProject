@@ -10,15 +10,15 @@ namespace WebApplication.Models
     public class CheckList
     {
         [DisplayName("請四擇一")]
-        public int three_six { get; set; }
+        public string three_six { get; set; }
         [DisplayName("請二擇一")]
-        public int three { get; set; }
+        public string three { get; set; }
         [DisplayName("健保碼")]
         public string three_1{ get; set; }
         [DisplayName("健保價")]
         public string three_2 { get; set; }
         [DisplayName("請三擇一")]
-        public int four { get; set; }
+        public string four { get; set; }
         [DisplayName("自費碼")]
         public string four_1 { get; set; }
         [DisplayName("HTA")]

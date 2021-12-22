@@ -43,10 +43,18 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult CheckList(CheckListViewModel checklist)
         {
+            Console.WriteLine("stage 0");
             CheckList checkList = new CheckList();
             checkList.three_1 = checklist.checklisttest.three_1;
             checkList.three_2 = checklist.checklisttest.three_2;
+            checkList.three_six = checklist.checklisttest.three_six;
+            checkList.three = checklist.checklisttest.three;
+            checkList.four = checklist.checklisttest.four;
             checkList.four_1 = checklist.checklisttest.four_1;
+            checkList.four_2 = checklist.checklisttest.four_2;
+            checkList.five_1= checklist.checklisttest.five_1;
+            checkList.five_2 = checklist.checklisttest.five_2;
+            checkList.five_3 = checklist.checklisttest.five_3;
             checkDBList.CreateList(checkList);
 
             return View();
