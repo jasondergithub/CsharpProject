@@ -27,6 +27,9 @@ namespace WebApplication.Services
                 case 3:
                     uploadurl += "cp";
                     break;
+                case 4:
+                    uploadurl += "pd";
+                    break;
             }
 
             Stream streamObj = uploadfile.InputStream;

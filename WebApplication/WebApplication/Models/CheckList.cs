@@ -30,7 +30,5 @@ namespace WebApplication.Models
         [DisplayName("內含金額")]
         public string five_3 { get; set; }
 
-
-
     }
 }

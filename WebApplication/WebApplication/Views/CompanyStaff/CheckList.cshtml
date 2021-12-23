@@ -18,23 +18,23 @@
             document.getElementById("自費碼").style.display = 'none'
             document.getElementById("HTA").style.display = 'none'
 
-            document.getElementById("checklisttest_three_1").required = false
-            document.getElementById("checklisttest_three_2").required = false
-            document.getElementById("checklisttest_four_2").required = false
-            document.getElementById("checklisttest_four_1").required = false
-            document.getElementById("checklisttest_five_1").required = false
-            document.getElementById("checklisttest_five_2").required = false
-            document.getElementById("checklisttest_five_3").required = false
-
+            var tmp = document.getElementsByClassName("form-control text-box single-line")
+            for (var i = 0; i < tmp.length; i++) {
+                tmp[i].required = false
+            }
+            document.getElementById("checklisttest_four").required = false
 
             if (radio.value != "耗材") {
                 if (radio.value == "健保給付") {
                     document.getElementById("checklisttest_three_1").required = true
                     document.getElementById("checklisttest_three_2").required = true
+                    document.getElementById("checklisttest_three").required = true
                 } else if (radio.value == "內含") {
                     document.getElementById("checklisttest_five_1").required = true
                     document.getElementById("checklisttest_five_2").required = true
                     document.getElementById("checklisttest_five_3").required = true
+                } else if (radio.value == "非健保給付(自費)") {
+                    document.getElementById("checklisttest_four").required = true
                 }
                 document.getElementById(radio.value).style.display = 'block'
             }
@@ -42,7 +42,7 @@
     }
     function showStuff2(radio) {
         if (radio.checked == true) {
-            console.log(radio.value)
+            //console.log(radio.value)
             document.getElementById("自費碼").style.display = 'none'
             document.getElementById("HTA").style.display = 'none'
             if (radio.value != "依醫療法21條") {
@@ -67,13 +67,13 @@
         <hr />
         <div class="form-group">
             @Html.LabelFor(model => model.checklisttest.three_six, htmlAttributes: new { @class = "control-label col-md-2" })
-            <label class="btn" name="innerOption1">
-                @Html.RadioButtonFor(model => model.checklisttest.three_six, "健保給付", htmlAttributes: new { @class = "innerOption1", @onchange = "showStuff1(this)" }) 健保給付
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.three_six, "健保給付", htmlAttributes: new { @onchange = "showStuff1(this)" }) 健保給付
             </label>
-            <label class="btn" name="innerOption2">
+            <label class="btn">
                 @Html.RadioButtonFor(model => model.checklisttest.three_six, "非健保給付(自費)", htmlAttributes: new { @onchange = "showStuff1(this)" }) 非健保給付(自費)
             </label>
-            <label class="btn" name="innerOption3">
+            <label class="btn">
                 @Html.RadioButtonFor(model => model.checklisttest.three_six, "內含", htmlAttributes: new { @onchange = "showStuff1(this)" }) 內含
             </label>
             <label class="btn">
@@ -84,7 +84,7 @@
          <div id="健保給付" style="display: none;">
             <div class=" form-group">
                 @Html.LabelFor(model => model.checklisttest.three_1, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.checklisttest.three_1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.checklisttest.three_1, new { htmlAttributes = new { @class = "form-control three_six" } })
                 <br/>
                 @Html.LabelFor(model => model.checklisttest.three_2, htmlAttributes: new { @class = "control-label col-md-2" })
                 @Html.EditorFor(model => model.checklisttest.three_2, new { htmlAttributes = new { @class = "form-control" } })
@@ -100,6 +100,7 @@
                 </label>
             </div>
         </div>
+
         <div style="display:none"  id="非健保給付(自費)">
             <div class="form-group">
                 @Html.LabelFor(model => model.checklisttest.four, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -114,12 +115,7 @@
                 </label>
             </div>
         </div>
-        <!--<div id="自費碼" style="display: none;">
-            <div class=" form-group" >
-                @Html.LabelFor(model => model.checklisttest.four_1, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.checklisttest.four_1, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>-->
+
         <div class=" form-group"  style="display:none " id="自費碼">
             @Html.LabelFor(model => model.checklisttest.four_1, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.checklisttest.four_1, new { htmlAttributes = new { @class = "form-control" } })
@@ -129,6 +125,7 @@
             @Html.LabelFor(model => model.checklisttest.four_2, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.checklisttest.four_2, new { htmlAttributes = new { @class = "form-control" } })
         </div>
+
         <div class=" form-group"  style="display:none"  id="內含">
             @Html.LabelFor(model => model.checklisttest.five_1, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.checklisttest.five_1, new { htmlAttributes = new { @class = "form-control" } })
@@ -140,7 +137,6 @@
             @Html.EditorFor(model => model.checklisttest.five_3, new { htmlAttributes = new { @class = "form-control" } })
         </div>
 
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -149,48 +145,8 @@
     </div>
     }
 
-@*<div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
-
-    @model WebApplication.ViewModels.CheckListViewModel
-
-    @{
-        ViewBag.Title = "CheckList";
-    }
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>CheckListViewModel</h4>
-            <hr />
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.checklisttest.three_six, htmlAttributes: new { @class = "control-label col-md-2" })
-                <label class="btn" name="innerOption1">
-                    @Html.RadioButtonFor(model => model.checklisttest.three_six, "健保給付", htmlAttributes: new { @class = "innerOption1", @onchange = "showStuff1(this)" }) 健保給付
-                </label>
-                <label class="btn" name="innerOption2">
-                    @Html.RadioButtonFor(model => model.checklisttest.three_six, "非健保給付(自費)", htmlAttributes: new { @onchange = "showStuff1(this)" }) 非健保給付(自費)
-                </label>
-                <label class="btn" name="innerOption3">
-                    @Html.RadioButtonFor(model => model.checklisttest.three_six, "內含", htmlAttributes: new { @onchange = "showStuff1(this)" }) 內含
-                </label>
-                <label class="btn">
-                    @Html.RadioButtonFor(model => model.checklisttest.three_six, "耗材", htmlAttributes: new { @onchange = "showStuff1(this)" }) 耗材(成本由醫院吸收)
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-
-    }*@
 

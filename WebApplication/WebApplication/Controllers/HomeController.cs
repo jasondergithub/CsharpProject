@@ -77,7 +77,7 @@ namespace WebApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                if (photos[0] == null || photos[1] == null || photos[2] == null)
+                if (photos[0] == null || photos[1] == null || photos[2] == null || photos[3] == null)
                 {
                     ViewBag.notEnoughPhoto = true;
                     ViewBag.accountExist = false;
@@ -103,17 +103,19 @@ namespace WebApplication.Controllers
                     if (!ViewBag.accountExist) 
                     {
                         ViewBag.DirCreateSucc = createDirectory.createDir(newMember.companyId);
-                        //建立公司(統編)資料夾下的三個資料夾 (1->販售許可(sp),  2->3個月(3m),  3->公司證(cp))
+                        //建立公司(統編)資料夾下的三個資料夾 (1->販售許可(sp),  2->3個月(3m),  3->公司證(cp) 4->產品目錄(pd))
                         List<string> myStringLists = new List<string>();
                         myStringLists.Add("sp");
                         myStringLists.Add("3m");
                         myStringLists.Add("cp");
+                        myStringLists.Add("pd");
+
                         foreach (string i in myStringLists)
                         {
                             string subDirName = newMember.companyId + "/" + i;
                             ViewBag.DirCreateSucc = createDirectory.createDir(subDirName);
                         }
-                        for (int order = 0; order <= 2; order++)
+                        for (int order = 0; order < myStringLists.Count(); order++)
                         {
                             HttpPostedFileBase f = (HttpPostedFileBase)photos[order];
                             uploadObject.UploadToFtp(f, newMember.companyId, order + 1);

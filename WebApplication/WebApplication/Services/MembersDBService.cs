@@ -139,7 +139,7 @@ namespace WebApplication.Services
                 //執行Sql指令
                 cmd.ExecuteNonQuery();
             }
-            catch // (Exception e)
+            catch  (Exception e)
             {
                 //丟出錯誤
                 //throw new Exception(e.Message.ToString());
