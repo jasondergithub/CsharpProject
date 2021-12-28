@@ -14,7 +14,7 @@ namespace WebApplication.Services
         {
 
             SqlConnection conn = new SqlConnection(connStr);
-            string ss = " INSERT INTO checkList (three_six, three, three_1, three_2, four, four_1, four_2, five_1, five_2, five_3)VALUES(@three_six, @three, @three_1, @three_2, @four, @four_1, @four_2, @five_1, @five_2, @five_3)";
+            string ss = " INSERT INTO checkList (two_1, two_2, two_3, two_4, two_5, three_six, three, three_1, three_2, four, four_1, four_2, five_1, five_2, five_3)VALUES(@two_1, @two_2, @two_3, @two_4, @two_5,@three_six, @three, @three_1, @three_2, @four, @four_1, @four_2, @five_1, @five_2, @five_3)";
             SqlCommand cmd = new SqlCommand(
             @ss);
             //SqlCommand cmd = new SqlCommand(
@@ -34,6 +34,11 @@ namespace WebApplication.Services
             //openEssential(list);    // 開資料表權限
 
             cmd.Connection = conn;
+            cmd.Parameters.Add(new SqlParameter("@two_1", list.two_1));
+            cmd.Parameters.Add(new SqlParameter("@two_2", list.two_2));
+            cmd.Parameters.Add(new SqlParameter("@two_3", list.two_3));
+            cmd.Parameters.Add(new SqlParameter("@two_4", list.two_4));
+            cmd.Parameters.Add(new SqlParameter("@two_5", list.two_5));
             cmd.Parameters.Add(new SqlParameter("@three_six", list.three_six));
             cmd.Parameters.Add(new SqlParameter("@three", list.three));
             cmd.Parameters.Add(new SqlParameter("@three_1", list.three_1));

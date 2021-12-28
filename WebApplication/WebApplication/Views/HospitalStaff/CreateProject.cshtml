@@ -35,10 +35,43 @@
             @Html.ValidationMessageFor(model => model.project.projectGenre, "", new { @class = "text-danger" })
         </div>
     </div>
-    
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.project.usage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.project.usage, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.project.usage, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.project.predictOfUsePerMonth, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.project.predictOfUsePerMonth, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.project.predictOfUsePerMonth, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.project.recommandId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.project.recommandId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.project.recommandId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
     <div class="form-group">
         @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
         @Html.DropDownListFor(model => model.Name, new SelectList(ViewBag.drop_list), "選擇廠商名稱", htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.project.buyReason, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.project.buyReason, htmlAttributes : new { @class = "form-control wide", @rows = 5 })
+            @Html.ValidationMessageFor(model => model.project.buyReason, "", new { @class = "text-danger" })
+        </div>
     </div>
 
     <div class="form-group">
@@ -52,3 +85,9 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<style>
+    .wide {
+        height: 300px;
+    }
+</style>

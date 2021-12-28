@@ -61,6 +61,15 @@ namespace WebApplication.Models
         [StringLength(200, ErrorMessage = "Email長度最多200字元")]
         [EmailAddress(ErrorMessage = "這不是Email格式")]
         public string email5 { get; set; }
+        [DisplayName("請選擇公司型態")]
+        [Required(ErrorMessage = "請選擇")]
+        public string factoryType { get; set; }
+        [DisplayName("是否為工廠")]
+        [Required(ErrorMessage = "此欄位為必填欄位")]
+        public bool isFactory { get; set; }
+        [DisplayName("是否為醫療器材商業同業公會會員")]
+        [Required(ErrorMessage = "此欄位為必填欄位")]
+        public bool isMember { get; set; }
 
     }
 }

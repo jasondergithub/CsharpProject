@@ -19,8 +19,8 @@ namespace WebApplication.Services
         {
             SqlConnection sqlConnection = new SqlConnection(connStr);
             SqlCommand sqlCommand = new SqlCommand(
-                @"INSERT INTO Project (projectId, projectGenre,time,season,projectNo,department,checkAB,judgeState,CompanyId)
-                VALUES (@projectId, @projectGenre,@time,@season,@projectNo,@department,@checkAB,@judgeState,@CompanyId)");
+                @"INSERT INTO Project (projectId, projectGenre,time,season,projectNo,department,checkAB,judgeState,CompanyId,buyReason,usage,predictOfUsePerMonth,recommandId)
+                VALUES (@projectId, @projectGenre,@time,@season,@projectNo,@department,@checkAB,@judgeState,@CompanyId,@buyReason,@usage,@predictOfUsePerMonth,@recommandId)");
             sqlCommand.Connection = sqlConnection;
             sqlCommand.Parameters.Add(new SqlParameter("@projectId", newProject.projectId));
             sqlCommand.Parameters.Add(new SqlParameter("@projectGenre", newProject.projectGenre));
@@ -31,6 +31,10 @@ namespace WebApplication.Services
             sqlCommand.Parameters.Add(new SqlParameter("@checkAB", false));
             sqlCommand.Parameters.Add(new SqlParameter("@judgeState", false));
             sqlCommand.Parameters.Add(new SqlParameter("@CompanyId", newProject.companyId));
+            sqlCommand.Parameters.Add(new SqlParameter("@buyReason", newProject.buyReason));
+            sqlCommand.Parameters.Add(new SqlParameter("@usage", newProject.usage));
+            sqlCommand.Parameters.Add(new SqlParameter("@predictOfUsePerMonth", newProject.predictOfUsePerMonth));
+            sqlCommand.Parameters.Add(new SqlParameter("@recommandId", newProject.recommandId));
             //確保程式不會因執行錯誤而中斷
             try
             {

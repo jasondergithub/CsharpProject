@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         private readonly MembersDBService membersDBServices = new MembersDBService();
@@ -19,7 +19,7 @@ namespace WebApplication.Controllers
         private readonly uploadFileService uploadObject = new uploadFileService();
         public ActionResult Index()
         {
-            return View();   
+            return View();
         }
 
         public ActionResult CompanyLogin()
@@ -31,7 +31,7 @@ namespace WebApplication.Controllers
         {
             string ValidateStr = membersDBServices.LoginCheck(LoginMember.companyId, LoginMember.password);
             //判斷驗證結果是否有錯誤訊息
-            if (String.IsNullOrEmpty(ValidateStr)) 
+            if (String.IsNullOrEmpty(ValidateStr))
             {
                 // 無錯誤訊息則登入
                 // 先藉由 Services 取得登入者角色資料
@@ -96,11 +96,19 @@ namespace WebApplication.Controllers
                     newMember.fax = RegisterMember.newMember.fax;
                     newMember.telephone = RegisterMember.newMember.telephone;
                     newMember.email1 = RegisterMember.newMember.email1;
+                    newMember.email2 = RegisterMember.newMember.email2;
+                    newMember.email3 = RegisterMember.newMember.email3;
+                    newMember.email4 = RegisterMember.newMember.email4;
+                    newMember.email5 = RegisterMember.newMember.email5;
+                    newMember.factoryType = RegisterMember.newMember.factoryType;
+                    newMember.isFactory = RegisterMember.newMember.isFactory;
+                    newMember.isMember = RegisterMember.newMember.isMember;
+
 
                     //呼叫MemberDBService.cs中的Register創建公司資料表
                     ViewBag.accountExist = membersDBServices.Register(newMember);
                     // 呼叫createDirectory.cs 中的createDir 創建資料夾
-                    if (!ViewBag.accountExist) 
+                    if (!ViewBag.accountExist)
                     {
                         ViewBag.DirCreateSucc = createDirectory.createDir(newMember.companyId);
                         //建立公司(統編)資料夾下的三個資料夾 (1->販售許可(sp),  2->3個月(3m),  3->公司證(cp) 4->產品目錄(pd))
@@ -121,14 +129,14 @@ namespace WebApplication.Controllers
                             uploadObject.UploadToFtp(f, newMember.companyId, order + 1);
                         }
                     }
-                    else 
+                    else
                     {
                         ViewBag.DirCreateSucc = false;
                     }
 
                 }
             }
-                       
+
             return View();
         }
         public ActionResult RegisterResult()

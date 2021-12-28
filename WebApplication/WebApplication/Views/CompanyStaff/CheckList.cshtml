@@ -5,15 +5,18 @@
 }
 
 <script type="text/javascript">
+
     function showStuff1(radio) {
+        
+        var tmp1 = document.getElementById("checklisttest_two_1").required = true
         if (radio.checked == true) {
             document.getElementById("健保給付").style.display = 'none'
             document.getElementById("非健保給付(自費)").style.display = 'none'
             document.getElementById("內含").style.display = 'none'
-
+            
             var tmp = document.getElementsByClassName("test")
             for (var i = 0; i < tmp.length; i++) {
-                                tmp[i].checked = false             
+                tmp[i].checked = false
             }
             document.getElementById("自費碼").style.display = 'none'
             document.getElementById("HTA").style.display = 'none'
@@ -62,87 +65,148 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>CheckListViewModel</h4>
-        <hr />
-        <div class="form-group">
-            @Html.LabelFor(model => model.checklisttest.three_six, htmlAttributes: new { @class = "control-label col-md-2" })
-            <label class="btn">
-                @Html.RadioButtonFor(model => model.checklisttest.three_six, "健保給付", htmlAttributes: new { @onchange = "showStuff1(this)" }) 健保給付
-            </label>
-            <label class="btn">
-                @Html.RadioButtonFor(model => model.checklisttest.three_six, "非健保給付(自費)", htmlAttributes: new { @onchange = "showStuff1(this)" }) 非健保給付(自費)
-            </label>
-            <label class="btn">
-                @Html.RadioButtonFor(model => model.checklisttest.three_six, "內含", htmlAttributes: new { @onchange = "showStuff1(this)" }) 內含
-            </label>
-            <label class="btn">
-                @Html.RadioButtonFor(model => model.checklisttest.three_six, "耗材", htmlAttributes: new { @onchange = "showStuff1(this)" }) 耗材(成本由醫院吸收)
-            </label>
-        </div>
+<div class="form-horizontal">
+    <h4>CheckListViewModel</h4> 
+    <hr />
 
-         <div id="健保給付" style="display: none;">
-            <div class=" form-group">
-                @Html.LabelFor(model => model.checklisttest.three_1, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.checklisttest.three_1, new { htmlAttributes = new { @class = "form-control three_six" } })
-                <br/>
-                @Html.LabelFor(model => model.checklisttest.three_2, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.checklisttest.three_2, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
+    <div class=" form-group">
+        @Html.LabelFor(model => model.checklisttest.two_1, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.two_1, new { htmlAttributes = new { @class = "form-control two"}})
+        @*@Html.ValidationMessageFor(model => model.checklisttest.two_1, "", new { @class = "text-danger" })*@
+        <br />
+        @Html.LabelFor(model => model.checklisttest.two_2, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.two_2, new { htmlAttributes = new { @class = "form-control two"} })
+        @*@Html.ValidationMessageFor(model => model.checklisttest.two_2, "", new { @class = "text-danger" })*@
+        <br />
+  
+        @Html.LabelFor(model => model.checklisttest.two_3, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.two_3, new { htmlAttributes = new { @class = "form-control two"} })
+        @*@Html.ValidationMessageFor(model => model.checklisttest.two_3, "", new { @class = "text-danger" })*@
+        <br />
+ 
+        @Html.LabelFor(model => model.checklisttest.two_4, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.two_4, new { htmlAttributes = new { @class = "form-control two"} })
+        @*@Html.ValidationMessageFor(model => model.checklisttest.two_4, "", new { @class = "text-danger" })*@
+        <br />
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.checklisttest.three, htmlAttributes: new { @class = "control-label col-md-2" })
-                <label class="btn">
-                    @Html.RadioButtonFor(model => model.checklisttest.three, "差額給付") 差額給付
-                </label>
-                <label class="btn">
-                    @Html.RadioButtonFor(model => model.checklisttest.three, "給付限制") 給付限制
-                </label>
-            </div>
-        </div>
+        @Html.LabelFor(model => model.checklisttest.two_5, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.two_5, new { htmlAttributes = new { @class = "form-control two"} })
+        @*@Html.ValidationMessageFor(model => model.checklisttest.two_5, "", new { @class = "text-danger" })*@
 
-        <div style="display:none"  id="非健保給付(自費)">
-            <div class="form-group">
-                @Html.LabelFor(model => model.checklisttest.four, htmlAttributes: new { @class = "control-label col-md-2" })
-                <label class="btn">
-                    @Html.RadioButtonFor(model => model.checklisttest.four, "自費碼", htmlAttributes: new { @class = "test",@onchange = "showStuff2(this)" }) 自費碼
-                </label>
-                <label class="btn">
-                    @Html.RadioButtonFor(model => model.checklisttest.four, "HTA", htmlAttributes: new { @class = "test",@onchange = "showStuff2(this)" }) HTA
-                </label>
-                <label class="btn">
-                    @Html.RadioButtonFor(model => model.checklisttest.four, "依醫療法21條", htmlAttributes: new { @class = "test", @onchange = "showStuff2(this)" }) 依醫療法21條
-                </label>
-            </div>
-        </div>
+    </div>
 
-        <div class=" form-group"  style="display:none " id="自費碼">
-            @Html.LabelFor(model => model.checklisttest.four_1, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.checklisttest.four_1, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
+    <!--<div class=" form-group">
+        @Html.LabelFor(model => model.checklisttest.two_1, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.checklisttest.two_1, new { htmlAttributes = new { @class = "form-control three_six", @required = "required" } })-->
+    @*@Html.ValidationMessageFor(model => model.checklisttest.two_1, "", new { @class = "text-danger" })*@
+    <!--<br/>
+    </div>
+    @Html.LabelFor(model => model.checklisttest.two_2, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.checklisttest.two_2, new { htmlAttributes = new { @class = "form-control three_six" ,@required = "required" } })-->
+    @*@Html.ValidationMessageFor(model => model.checklisttest.two_2, "", new { @class = "text-danger" })*@
+    <!--<br />
+    </div>
+    @Html.LabelFor(model => model.checklisttest.two_3, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.checklisttest.two_3, new { htmlAttributes = new { @class = "form-control", @required = "required" } })-->
+    @*@Html.ValidationMessageFor(model => model.checklisttest.two_3, "", new { @class = "text-danger" })*@
+    <!--<br />
+    </div>
+    @Html.LabelFor(model => model.checklisttest.two_4, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.checklisttest.two_4, new { htmlAttributes = new { @class = "form-control", @required = "required" } })-->
+    @*@Html.ValidationMessageFor(model => model.checklisttest.two_4, "", new { @class = "text-danger" })*@
+    <!--<br />
+    </div>
 
-        <div class=" form-group"  style="display:none" id="HTA">
-            @Html.LabelFor(model => model.checklisttest.four_2, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.checklisttest.four_2, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
+    @Html.LabelFor(model => model.checklisttest.two_5, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.checklisttest.two_5, new { htmlAttributes = new { @class = "form-control", @required = "required" } })-->
+    @*@Html.ValidationMessageFor(model => model.checklisttest.two_5, "", new { @class = "text-danger" })*@
+    <!--</div>
+    </div>-->
 
-        <div class=" form-group"  style="display:none"  id="內含">
-            @Html.LabelFor(model => model.checklisttest.five_1, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.checklisttest.five_1, new { htmlAttributes = new { @class = "form-control" } })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.checklisttest.three_six, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="btn">
+            @Html.RadioButtonFor(model => model.checklisttest.three_six, "健保給付", htmlAttributes: new { @onchange = "showStuff1(this)" }) 健保給付
+        </label>
+        <label class="btn">
+            @Html.RadioButtonFor(model => model.checklisttest.three_six, "非健保給付(自費)", htmlAttributes: new { @onchange = "showStuff1(this)" }) 非健保給付(自費)
+        </label>
+        <label class="btn">
+            @Html.RadioButtonFor(model => model.checklisttest.three_six, "內含", htmlAttributes: new { @onchange = "showStuff1(this)" }) 內含
+        </label>
+        <label class="btn">
+            @Html.RadioButtonFor(model => model.checklisttest.three_six, "耗材", htmlAttributes: new { @onchange = "showStuff1(this)" }) 耗材(成本由醫院吸收)
+        </label>
+    </div>
+
+    <div id="健保給付" style="display: none;">
+        <div class=" form-group">
+            @Html.LabelFor(model => model.checklisttest.three_1, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.checklisttest.three_1, new { htmlAttributes = new { @class = "form-control three_six" } })
             <br />
-            @Html.LabelFor(model => model.checklisttest.five_2, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.checklisttest.five_2, new { htmlAttributes = new { @class = "form-control" } })
-            <br />
-            @Html.LabelFor(model => model.checklisttest.five_3, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.checklisttest.five_3, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.checklisttest.three_2, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.checklisttest.three_2, new { htmlAttributes = new { @class = "form-control" } })
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            @Html.LabelFor(model => model.checklisttest.three, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.three, "差額給付") 差額給付
+            </label>
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.three, "給付限制") 給付限制
+            </label>
         </div>
     </div>
+
+    <div style="display:none" id="非健保給付(自費)">
+        <div class="form-group">
+            @Html.LabelFor(model => model.checklisttest.four, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.four, "自費碼", htmlAttributes: new { @class = "test", @onchange = "showStuff2(this)" }) 自費碼
+            </label>
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.four, "HTA", htmlAttributes: new { @class = "test", @onchange = "showStuff2(this)" }) HTA
+            </label>
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.four, "依醫療法21條", htmlAttributes: new { @class = "test", @onchange = "showStuff2(this)" }) 依醫療法21條
+            </label>
+        </div>
+    </div>
+
+    <div class=" form-group" style="display:none " id="自費碼">
+        @Html.LabelFor(model => model.checklisttest.four_1, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.four_1, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class=" form-group" style="display:none" id="HTA">
+        @Html.LabelFor(model => model.checklisttest.four_2, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.four_2, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class=" form-group" style="display:none" id="內含">
+        @Html.LabelFor(model => model.checklisttest.five_1, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.five_1, new { htmlAttributes = new { @class = "form-control" } })
+        <br />
+        @Html.LabelFor(model => model.checklisttest.five_2, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.five_2, new { htmlAttributes = new { @class = "form-control" } })
+        <br />
+        @Html.LabelFor(model => model.checklisttest.five_3, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.five_3, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
     }
 
 @*@section Scripts {

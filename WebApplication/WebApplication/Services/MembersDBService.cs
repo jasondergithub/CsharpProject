@@ -44,22 +44,22 @@ namespace WebApplication.Services
             try
             {
 
-            Data.companyName = reader["companyName"].ToString();
-            Data.companyId = reader["companyId"].ToString();
-            Data.password = reader["password"].ToString();
-            Data.companyLeader = reader["companyLeader"].ToString();
-            Data.companyAddress = reader["companyAddress"].ToString();
-            Data.fax = reader["fax"].ToString();
-            Data.telephone = reader["telephone"].ToString();
-            Data.email1 = reader["email1"].ToString();
-            Data.email2 = reader["email2"].ToString();
-            Data.email3 = reader["email3"].ToString();
-            Data.email4 = reader["email4"].ToString();
-            Data.email5 = reader["email5"].ToString();
+                Data.companyName = reader["companyName"].ToString();
+                Data.companyId = reader["companyId"].ToString();
+                Data.password = reader["password"].ToString();
+                Data.companyLeader = reader["companyLeader"].ToString();
+                Data.companyAddress = reader["companyAddress"].ToString();
+                Data.fax = reader["fax"].ToString();
+                Data.telephone = reader["telephone"].ToString();
+                Data.email1 = reader["email1"].ToString();
+                Data.email2 = reader["email2"].ToString();
+                Data.email3 = reader["email3"].ToString();
+                Data.email4 = reader["email4"].ToString();
+                Data.email5 = reader["email5"].ToString();
             }
             catch
             {
-            //查無資料
+                //查無資料
                 Data = null;
             }
             finally
@@ -77,13 +77,13 @@ namespace WebApplication.Services
             {
                 //進行帳號密碼確認
                 if (PasswordCheck(LogingMember, Password))
-                    {
-                        return "";
-                    }
+                {
+                    return "";
+                }
                 else
-                    {
-                        return "密碼輸入錯誤";
-                    }
+                {
+                    return "密碼輸入錯誤";
+                }
             }
             else
             {
@@ -105,8 +105,8 @@ namespace WebApplication.Services
             //conn.ConnectionString = connStr;
             SqlCommand cmd = new SqlCommand(
             @" INSERT INTO Company (password, companyName, companyId, companyLeader,
-                                            companyAddress, fax, telephone, email1,  email2, email3, email4, email5)VALUES( @password,@companyName, @companyId, @companyLeader,
-                                            @companyAddress, @fax, @telephone, @email1,  @email2, @email3, @email4, @email5)");
+                                            companyAddress, fax, telephone, email1,  email2, email3, email4, email5,factoryType,isFactory,isMember)VALUES( @password,@companyName, @companyId, @companyLeader,
+                                            @companyAddress, @fax, @telephone, @email1,  @email2, @email3, @email4, @email5,@factoryType,@isFactory,@isMember)");
             if (newMember.email2 == null)
                 newMember.email2 = "";
             if (newMember.email3 == null)
@@ -131,6 +131,9 @@ namespace WebApplication.Services
             cmd.Parameters.Add(new SqlParameter("@email3", newMember.email3));
             cmd.Parameters.Add(new SqlParameter("@email4", newMember.email4));
             cmd.Parameters.Add(new SqlParameter("@email5", newMember.email5));
+            cmd.Parameters.Add(new SqlParameter("@factoryType", newMember.factoryType));
+            cmd.Parameters.Add(new SqlParameter("@isFactory", newMember.isFactory));
+            cmd.Parameters.Add(new SqlParameter("@isMember", newMember.isMember));
             //確保程式不會因執行錯誤而整個中斷
             try
             {
@@ -139,7 +142,7 @@ namespace WebApplication.Services
                 //執行Sql指令
                 cmd.ExecuteNonQuery();
             }
-            catch  (Exception e)
+            catch (Exception e)
             {
                 //丟出錯誤
                 //throw new Exception(e.Message.ToString());
