@@ -45,6 +45,11 @@ namespace WebApplication.Controllers
         {
             Console.WriteLine("stage 0");
             CheckList checkList = new CheckList();
+            checkList.two_1 = checklist.checklisttest.two_1;
+            checkList.two_2 = checklist.checklisttest.two_2;
+            checkList.two_3 = checklist.checklisttest.two_3;
+            checkList.two_4 = checklist.checklisttest.two_4;
+            checkList.two_5 = checklist.checklisttest.two_5;
             checkList.three_1 = checklist.checklisttest.three_1;
             checkList.three_2 = checklist.checklisttest.three_2;
             checkList.three_six = checklist.checklisttest.three_six;

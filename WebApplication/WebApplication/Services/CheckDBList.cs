@@ -14,15 +14,14 @@ namespace WebApplication.Services
         {
 
             SqlConnection conn = new SqlConnection(connStr);
-            string ss = " INSERT INTO checkList (two_1, two_2, two_3, two_4, two_5, three_six, three, three_1, three_2, four, four_1, four_2, five_1, five_2, five_3)VALUES(@two_1, @two_2, @two_3, @two_4, @two_5,@three_six, @three, @three_1, @three_2, @four, @four_1, @four_2, @five_1, @five_2, @five_3)";
-            SqlCommand cmd = new SqlCommand(
-            @ss);
+            string ss = " INSERT INTO checkList (two_1, two_2, two_3, two_4, two_5, three_six, three, three_1, three_2, four, four_1, four_2, five_1, five_2, five_3)VALUES(@two_1, @two_2, @two_3, @two_4, @two_5, @three_six, @three, @three_1, @three_2, @four, @four_1, @four_2, @five_1, @five_2, @five_3)";
+            SqlCommand cmd = new SqlCommand(@ss);
             //SqlCommand cmd = new SqlCommand(
             //@" INSERT INTO checkList (three_six, three, three_1, three_2, four, four_1, four_2, five_1, five_2, five_3)
             //                                 VALUES(@three_six, @three, @three_1, @three_2, @four, @four_1, @four_2, @five_1, @five_2, @five_3)");
 
             //openEssential(list);    // 開資料表權限
-            openEssentialWithFalse(list);   // 開資料表權限，設定true跟false
+            // openEssentialWithFalse(list);   // 開資料表權限，設定true跟false
 
             foreach (PropertyInfo prop in typeof(CheckList).GetProperties())
             {
