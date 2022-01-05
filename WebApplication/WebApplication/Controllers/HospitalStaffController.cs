@@ -35,10 +35,14 @@ namespace WebApplication.Controllers
             {
                 Session["department"] = "200";
                 string x = Session["department"].ToString();
-                newProject.project.projectNo = projectService.getProjectNo(x);              /* 流水號*/
-                newProject.project.time = projectService.getDate();                                    /*時間 (yyyy/MM/dd)*/
-                newProject.project.season = projectService.getSeason();                           /*季 (Q1,Q2,Q3,Q4)*/
-                newProject.project.department = x;                                                                  /*部門代號*/
+                /* 流水號*/
+                newProject.project.projectNo = projectService.getProjectNo(x);
+                /*時間 (yyyy/MM/dd)*/
+                newProject.project.time = projectService.getDate();
+                /*季 (Q1,Q2,Q3,Q4)*/
+                newProject.project.season = projectService.getSeason();
+                /*部門代號*/
+                newProject.project.department = x;
                 newProject.project.projectId = projectService.getProjectId(newProject.project.projectGenre, newProject.project.time, newProject.project.season, newProject.project.department, newProject.project.projectNo);        /*專案編號*/
                 newProject.project.companyId = projectService.getIdByName(newProject.Name);
 
@@ -51,6 +55,7 @@ namespace WebApplication.Controllers
                     string subDirName = newProject.project.companyId + '/' + newProject.project.projectId + "/" + i;
                     ViewBag.DirCreateSucc = createDirectory.createDir(subDirName);
                 }
+                /* 寫入資料表 */
                 projectService.Createproject(newProject.project);
                 //return RedirectToAction();
             }

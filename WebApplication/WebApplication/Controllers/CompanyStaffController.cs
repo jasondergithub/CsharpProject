@@ -45,6 +45,7 @@ namespace WebApplication.Controllers
         {
             Console.WriteLine("stage 0");
             CheckList checkList = new CheckList();
+            checkList.two = "衛福部許可證或特別同意函文";
             checkList.two_1 = checklist.checklisttest.two_1;
             checkList.two_2 = checklist.checklisttest.two_2;
             checkList.two_3 = checklist.checklisttest.two_3;
@@ -60,6 +61,18 @@ namespace WebApplication.Controllers
             checkList.five_1= checklist.checklisttest.five_1;
             checkList.five_2 = checklist.checklisttest.five_2;
             checkList.five_3 = checklist.checklisttest.five_3;
+            checkList.seven = checklist.checklisttest.seven;
+            checkList.eight = "品質保證書";
+            checkList.nine = "報價單";
+            checkList.ten = "其他醫院使用證明";
+            checkList.sub_ten = checklist.checklisttest.sub_ten;
+            checkList.ten_1 = checklist.checklisttest.ten_1;
+            checkList.ten_2 = checklist.checklisttest.ten_2;
+            checkList.ten_3 = checklist.checklisttest.ten_3;
+            checkList.eleven = "清楚圖檔";
+            checkList.thirteen = "試用報告";
+            checkList.fourteen = "審議資格簽核單";
+
             checkDBList.CreateList(checkList);
 
             return View();

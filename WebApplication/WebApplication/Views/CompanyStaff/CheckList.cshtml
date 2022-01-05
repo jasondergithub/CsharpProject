@@ -6,16 +6,15 @@
 
 <script type="text/javascript">
 
-    function showStuff1(radio) {
-        
-        var tmp1 = document.getElementById("checklisttest_two_1").required = true
+    function showStuff1(radio) {   
+        /*var tmp1 = document.getElementById("checklisttest_two_1").required = true*/
         if (radio.checked == true) {
             document.getElementById("健保給付").style.display = 'none'
             document.getElementById("非健保給付(自費)").style.display = 'none'
             document.getElementById("內含").style.display = 'none'
             
-            var tmp = document.getElementsByClassName("test")
-            console.log(tmp)
+            var tmp = document.getElementsByClassName("sub_three_six")
+            //console.log(tmp)
             for (var i = 0; i < tmp.length; i++) {
                 tmp[i].checked = false
             }
@@ -23,7 +22,7 @@
             document.getElementById("HTA").style.display = 'none'
 
             var tmp2 = document.querySelectorAll(".three_six > input")
-            console.log(tmp2.length);
+            //console.log(tmp2.length);
             for (var i = 0; i < tmp2.length; i++) {
                 tmp2[i].required = false
             }
@@ -36,16 +35,26 @@
                     document.getElementById("checklisttest_four").required = false
                     document.getElementById("checklisttest_four_1").value = ""
                     document.getElementById("checklisttest_four_2").value = ""
+                    document.getElementById("checklisttest_five_1").value = ""
+                    document.getElementById("checklisttest_five_2").value = ""
+                    document.getElementById("checklisttest_five_3").value = ""
                 } else if (radio.value == "內含") {
                     document.getElementById("checklisttest_three").required = false
                     document.getElementById("checklisttest_five_1").required = true
                     document.getElementById("checklisttest_five_2").required = true
                     document.getElementById("checklisttest_five_3").required = true
+                    document.getElementById("checklisttest_three_1").value = ""
+                    document.getElementById("checklisttest_three_2").value = ""
+                    document.getElementById("checklisttest_four_1").value = ""
+                    document.getElementById("checklisttest_four_2").value = ""
                 } else if (radio.value == "非健保給付(自費)") {
                     document.getElementById("checklisttest_three").required = false
                     document.getElementById("checklisttest_four").required = true
                     document.getElementById("checklisttest_three_1").value = ""
                     document.getElementById("checklisttest_three_2").value = ""
+                    document.getElementById("checklisttest_five_1").value = ""
+                    document.getElementById("checklisttest_five_2").value = ""
+                    document.getElementById("checklisttest_five_3").value = ""
                 }
                 document.getElementById(radio.value).style.display = 'block'
             }
@@ -56,14 +65,45 @@
             //console.log(radio.value)
             document.getElementById("自費碼").style.display = 'none'
             document.getElementById("HTA").style.display = 'none'
+            var tmp = document.querySelectorAll(".sub_four > input")
+            for (var i = 0; i < tmp.length; i++) {
+                tmp[i].required = false
+            }
             if (radio.value != "依醫療法21條") {
                 if (radio.value == "自費碼") {
                     document.getElementById("checklisttest_four_1").required = true
+                    document.getElementById("checklisttest_four_2").value = ""
                 } else if (radio.value == "HTA") {
                     document.getElementById("checklisttest_four_2").required = true
+                    document.getElementById("checklisttest_four_1").value = ""
                 }
                 document.getElementById(radio.value).style.display = 'block'
             }
+        }
+    }
+    function showStuff3(radio) {
+        if (radio.checked == true) {
+            document.getElementById("醫學中心").style.display = 'none'
+            document.getElementById("區域教學醫院").style.display = 'none'
+            var tmp = document.querySelectorAll(".sub_ten > input")
+            //console.log(tmp);
+            for (var i = 0; i < tmp.length; i++) {
+                tmp[i].required = false
+            }
+
+            if (radio.value == "醫學中心") {
+                document.getElementById(radio.value).style.display = 'block'
+                document.getElementById("checklisttest_ten_1").required = true
+                document.getElementById("checklisttest_ten_2").value = ""
+                document.getElementById("checklisttest_ten_3").value = ""
+            }
+            else if (radio.value == "區域教學醫院") {
+                document.getElementById(radio.value).style.display = 'block'
+                document.getElementById("checklisttest_ten_1").value = ""
+                document.getElementById("checklisttest_ten_2").required = true
+                document.getElementById("checklisttest_ten_3").required = true
+            }
+
         }
     }
 </script>
@@ -74,7 +114,7 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>CheckListViewModel</h4> 
+    <h4>CheckListViewModel</h4>
     <hr />
 
     <div class=" form-group">
@@ -123,10 +163,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.checklisttest.three, htmlAttributes: new { @class = "control-label col-md-2" })
             <label class="btn">
-                @Html.RadioButtonFor(model => model.checklisttest.three, "差額給付", htmlAttributes: new { @class = "test" }) 差額給付
+                @Html.RadioButtonFor(model => model.checklisttest.three, "差額給付", htmlAttributes: new { @class = "sub_three_six" }) 差額給付
             </label>
             <label class="btn">
-                @Html.RadioButtonFor(model => model.checklisttest.three, "給付限制", htmlAttributes: new { @class = "test" }) 給付限制
+                @Html.RadioButtonFor(model => model.checklisttest.three, "給付限制", htmlAttributes: new { @class = "sub_three_six" }) 給付限制
             </label>
         </div>
     </div>
@@ -135,23 +175,23 @@
         <div class="form-group">
             @Html.LabelFor(model => model.checklisttest.four, htmlAttributes: new { @class = "control-label col-md-2" })
             <label class="btn">
-                @Html.RadioButtonFor(model => model.checklisttest.four, "自費碼", htmlAttributes: new { @class = "test", @onchange = "showStuff2(this)" }) 自費碼
+                @Html.RadioButtonFor(model => model.checklisttest.four, "自費碼", htmlAttributes: new { @class = "sub_three_six", @onchange = "showStuff2(this)" }) 自費碼
             </label>
             <label class="btn">
-                @Html.RadioButtonFor(model => model.checklisttest.four, "HTA", htmlAttributes: new { @class = "test", @onchange = "showStuff2(this)" }) HTA
+                @Html.RadioButtonFor(model => model.checklisttest.four, "HTA", htmlAttributes: new { @class = "sub_three_six", @onchange = "showStuff2(this)" }) HTA
             </label>
             <label class="btn">
-                @Html.RadioButtonFor(model => model.checklisttest.four, "依醫療法21條", htmlAttributes: new { @class = "test", @onchange = "showStuff2(this)" }) 依醫療法21條
+                @Html.RadioButtonFor(model => model.checklisttest.four, "依醫療法21條", htmlAttributes: new { @class = "sub_three_six", @onchange = "showStuff2(this)" }) 依醫療法21條
             </label>
         </div>
     </div>
 
-    <div class=" form-group three_six" style="display:none " id="自費碼">
+    <div class=" form-group three_six sub_four" style="display:none " id="自費碼">
         @Html.LabelFor(model => model.checklisttest.four_1, htmlAttributes: new { @class = "control-label col-md-2" })
         @Html.EditorFor(model => model.checklisttest.four_1, new { htmlAttributes = new { @class = "form-control" } })
     </div>
 
-    <div class=" form-group three_six" style="display:none" id="HTA">
+    <div class=" form-group three_six sub_four" style="display:none" id="HTA">
         @Html.LabelFor(model => model.checklisttest.four_2, htmlAttributes: new { @class = "control-label col-md-2" })
         @Html.EditorFor(model => model.checklisttest.four_2, new { htmlAttributes = new { @class = "form-control" } })
     </div>
@@ -166,6 +206,40 @@
         @Html.LabelFor(model => model.checklisttest.five_3, htmlAttributes: new { @class = "control-label col-md-2" })
         @Html.EditorFor(model => model.checklisttest.five_3, new { htmlAttributes = new { @class = "form-control" } })
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.checklisttest.seven, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="btn">
+            @Html.RadioButtonFor(model => model.checklisttest.seven, "滅菌品", htmlAttributes: new { @required = "required" }) 是
+        </label>
+        <label class="btn">
+            @Html.RadioButtonFor(model => model.checklisttest.seven, "非滅菌品", htmlAttributes: new { @required = "required" }) 否
+        </label>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.checklisttest.ten, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="btn">
+            @Html.RadioButtonFor(model => model.checklisttest.sub_ten, "醫學中心", htmlAttributes: new { @required = "required", @onchange = "showStuff3(this)" }) 醫學中心
+        </label>
+        <label class="btn">
+            @Html.RadioButtonFor(model => model.checklisttest.sub_ten, "區域教學醫院", htmlAttributes: new { @required = "required", @onchange = "showStuff3(this)" }) 區域教學醫院
+        </label>
+    </div>
+
+    <div class=" form-group sub_ten" style="display:none" id="醫學中心">
+        @Html.LabelFor(model => model.checklisttest.ten_1, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.ten_1, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class=" form-group sub_ten" style="display:none" id="區域教學醫院">
+        @Html.LabelFor(model => model.checklisttest.ten_2, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.ten_2, new { htmlAttributes = new { @class = "form-control" } })
+        <br />
+        @Html.LabelFor(model => model.checklisttest.ten_3, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.checklisttest.ten_3, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
