@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Reflection;
+using System.Linq;
 
 namespace WebApplication.Services
 {
     public class Scanner
     {
         private CheckList _input;
-        private List<int> result;
+        private List<int> result = new List<int>();
         private List<string> tokenList = new List<string>() { "衛福部許可證或特別同意函文", "健保給付", "差額給付", "給付限制", "非健保給付(自費)", "依醫療法21條",
                                                               "內含", "滅菌品", "品質保證書", "報價單", "其他醫院使用證明", "清楚圖檔", "試用報告", "審議資格簽核單"};
 
@@ -22,13 +23,13 @@ namespace WebApplication.Services
         {
             foreach (PropertyInfo prop in typeof(CheckList).GetProperties())
             {
-                if (prop.GetValue(_input) != null)
+                if (!String.IsNullOrEmpty((string)prop.GetValue(_input)))
                 {
                     foreach(var token in tokenList)
                     {
                         if(String.Equals(token, (string)prop.GetValue(_input)))
                         {
-                            result.Add(tokenList.IndexOf(token));
+                            this.result.Add(tokenList.IndexOf(token));
                         }
                     }                    
                 }
@@ -43,7 +44,7 @@ namespace WebApplication.Services
 
     public class Builder
     {
-        private List<bool> state = new List<bool>(21) { false };
+        private List<bool> state = Enumerable.Repeat(false, 21).ToList();
         public void openPermission(int index)
         {
             state[index] = true; 
@@ -62,12 +63,12 @@ namespace WebApplication.Services
         public Parser(CheckList list)
         {
             scanner = new Scanner(list);
-            builder = new Builder();
-
+            builder = new Builder();            
         }
 
         public void parse()
         {
+            scanner.getToken();
             List<int> scanResult = scanner.getResult();
 
             foreach(var listName in scanResult)
