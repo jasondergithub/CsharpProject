@@ -76,52 +76,52 @@ namespace WebApplication.Services
                 switch (listName)
                 {
                     case 0:
-                        builder.openPermission(4);
-                        break;
-                    case 1:
-                        builder.openPermission(6);
-                        break;
-                    case 2:
-                        builder.openPermission(5);
-                        builder.openPermission(7);
-                        builder.openPermission(8);
-                        break;
-                    case 3:
-                        builder.openPermission(2);
-                        break;
-                    case 4:
-                        builder.openPermission(5);
-                        builder.openPermission(6);
-                        builder.openPermission(7);
-                        builder.openPermission(8);
-                        builder.openPermission(9);
-                        break;
-                    case 5:
-                        builder.openPermission(20);
-                        break;
-                    case 6:
-                        builder.openPermission(16);
-                        break;
-                    case 7:
-                        builder.openPermission(10);
-                        break;
-                    case 8:
-                        builder.openPermission(11);
-                        break;
-                    case 9:
-                        builder.openPermission(12);
-                        break;
-                    case 10:
-                        builder.openPermission(15);
-                        break;
-                    case 11:
                         builder.openPermission(3);
                         break;
-                    case 12:
+                    case 1:
+                        builder.openPermission(5);
+                        break;
+                    case 2:
+                        builder.openPermission(4);
+                        builder.openPermission(6);
+                        builder.openPermission(7);
+                        break;
+                    case 3:
                         builder.openPermission(1);
                         break;
-                    case 13:
+                    case 4:
+                        builder.openPermission(4);
+                        builder.openPermission(5);
+                        builder.openPermission(6);
+                        builder.openPermission(7);
+                        builder.openPermission(8);
+                        break;
+                    case 5:
                         builder.openPermission(19);
+                        break;
+                    case 6:
+                        builder.openPermission(15);
+                        break;
+                    case 7:
+                        builder.openPermission(9);
+                        break;
+                    case 8:
+                        builder.openPermission(10);
+                        break;
+                    case 9:
+                        builder.openPermission(11);
+                        break;
+                    case 10:
+                        builder.openPermission(14);
+                        break;
+                    case 11:
+                        builder.openPermission(2);
+                        break;
+                    case 12:
+                        builder.openPermission(0);
+                        break;
+                    case 13:
+                        builder.openPermission(18);
                         break;
                 }
             }
@@ -271,14 +271,30 @@ namespace WebApplication.Services
             Parser parser = new Parser(list);
             parser.parse();
             List<bool> result = parser.getResult();
-            string comstr_head = "INSERT INTO essentialAndReason (essentialA, essentialB, essentialC, essentialD, essentialE, essentialF, essentialG, essentialH, essentialI, essentialJ, essentialK, essentialL, essentialM, essentialN, essentialO, essentialP, essentialQ, essentialR, essentialS, essentialT, essentialU)" +
-                "VALUES(@0, @1, @2, @3,@4, @5, @6, @7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18, @19, @20)";
+            string comstr_head = "INSERT INTO essentialAndReason (projectId, essentialA, essentialB, essentialC, essentialD, essentialE, essentialF, essentialG, essentialH, essentialI, essentialJ, essentialK, essentialL, essentialM, essentialN, essentialO, essentialP, essentialQ, essentialR, essentialS, essentialT, essentialU)" +
+                "VALUES(@projectId, @0, @1, @2, @3,@4, @5, @6, @7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18, @19, @20)";
             SqlConnection conn = new SqlConnection(connStr);
             SqlCommand cmd = new SqlCommand(@comstr_head);
             cmd.Connection = conn;
+            cmd.Parameters.Add(new SqlParameter("@projectId", "12314142234"));
             for (int i=0; i<result.Count; i++)
             {
+                System.Diagnostics.Debug.WriteLine(result[i]);
                 cmd.Parameters.Add(new SqlParameter("@" + i.ToString(), result[i]));
+            }
+
+            try
+            {
+                conn.Open();    /* 開啟資料庫連線 */
+                cmd.ExecuteNonQuery();   /* 執行Sql指令 */
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message.ToString());  /* 丟出錯誤 */
+            }
+            finally
+            {
+                conn.Close();   /* 關閉資料庫連線 */
             }
         }
         //public void openEssentialWithFalse(CheckList list)
