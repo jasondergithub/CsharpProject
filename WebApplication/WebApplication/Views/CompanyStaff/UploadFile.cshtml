@@ -1,0 +1,45 @@
+﻿@model WebApplication.Models.reason
+@{
+    List<List<string>> folderNames = ViewBag.folderName;
+}
+<h1>檔案上傳</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>上傳內容</th>
+            <th>檔案上傳</th>
+            <th>未上傳理由</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (List<string> folderName in folderNames)
+        {
+            <tr>
+                <th>
+                    @folderName[0]
+                </th>
+                <th>
+                    <input type="file" name="photos" />
+                </th>
+                <th>
+                    <textarea name=@folderName[1]></textarea>
+                </th>
+            </tr>
+
+            @*<th>
+                        @Html.ActionLink("編輯", "EditStaff", new { ID = staff.ID })
+                    @Html.ActionLink("刪除", "DeleteStaff", new { ID = staff.ID })
+                </th>*@
+        }
+
+    </tbody>
+
+</table>
+
+<div class="form-group">
+    <div class="col-md-offset-5 col-md-7">
+        <input type="submit" value="上傳" class="btn btn-default" style="width:100px; height:50px" />
+    </div>
+</div>

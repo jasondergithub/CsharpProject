@@ -9,6 +9,7 @@ namespace WebApplication.Models
 {
     public class CheckList
     {
+        public string projectId { get; set; }
         public string two { get; set; }
         [DisplayName("許可證效期")]
         public string two_1 { get; set; }
@@ -62,7 +63,8 @@ namespace WebApplication.Models
         public string thirteen { get; set; }
         /* 審議資格簽核單 */
         public string fourteen { get; set; }
-        
+        public string fifteen { get; set; }
+
 
 
     }

@@ -1,0 +1,29 @@
+﻿@using WebApplication.Models;
+@{
+    List<Project> projects123 = ViewBag.projects;
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>專案ID</th>
+            <th>專案內容</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (Project project in projects123)
+        {
+            <tr>
+                <th>@project.projectId</th>
+                <th>@project.usage</th>
+            </tr>
+            @*<th>
+                        @Html.ActionLink("編輯", "EditStaff", new { ID = staff.ID })
+                    @Html.ActionLink("刪除", "DeleteStaff", new { ID = staff.ID })
+                </th>*@
+
+
+        }
+
+    </tbody>
+</table>

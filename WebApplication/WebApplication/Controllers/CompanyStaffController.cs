@@ -12,6 +12,7 @@ namespace WebApplication.Controllers
 {
     public class CompanyStaffController : Controller
     {
+        private readonly ProjectService dbmanger = new ProjectService();
         private readonly CheckDBList checkDBList = new CheckDBList();
         //登出
         [Authorize(Roles = "CompanyStaff")]
@@ -36,15 +37,18 @@ namespace WebApplication.Controllers
         {
             return View();
         }
-        public ActionResult CheckList()
+        public ActionResult CheckList() //string projectId
         {
+            //System.Diagnostics.Debug.WriteLine(projectId);
             return View();
         }
         [HttpPost]
-        public ActionResult CheckList(CheckListViewModel checklist)
+        public ActionResult CheckList(CheckListViewModel checklist, string projectId)
         {
-            Console.WriteLine("stage 0");
+            // System.Diagnostics.Debug.WriteLine(projectId);
+            
             CheckList checkList = new CheckList();
+            checkList.projectId = projectId;
             checkList.two = "衛福部許可證或特別同意函文";
             checkList.two_1 = checklist.checklisttest.two_1;
             checkList.two_2 = checklist.checklisttest.two_2;
@@ -72,9 +76,39 @@ namespace WebApplication.Controllers
             checkList.eleven = "清楚圖檔";
             checkList.thirteen = "試用報告";
             checkList.fourteen = "審議資格簽核單";
+            checkList.fifteen = "User理由";
+
 
             checkDBList.CreateList(checkList);
 
+            return View();
+        }
+        public ActionResult SearchProject()
+        {
+
+            string account = Session["account"].ToString();
+            List<Project> projects = dbmanger.getProjetctByCompany(account);
+            ViewBag.projects = projects;
+            return View();
+        }
+        public ActionResult UploadFile(string projectId)
+        {
+            List<bool> essentialValues = dbmanger.getEssentialValue(projectId);
+            List <string > essentiallabels = new List<string>(){ "試用報告", "給付限制文件","產品圖檔","衛福部許可證"
+                ,"自費特材療效比較表","健保/自費收載","新進自費衛材售價申請書","自費特材保證切結書","自費收載價格參考"
+                ,"衛材滅菌檢驗報告單","產品品質保證書","報價單","產品授權代理書","產品目錄","其他醫院使用證明"
+                ,"內含(處置治療表)","公會會員證書號","工廠登記證","審議資格簽核單","醫療法21條","User理由"};  
+            List<string> folderName = new List<string>() ;
+            for (int i = 0; i < 21; i++)
+            {
+                if (essentialValues[i]&&i!=0&&i!=18&&i!=20)
+                {
+                    folderName.Add(essentiallabels[i]);
+                    System.Diagnostics.Debug.WriteLine(essentiallabels[i]);
+                }
+            }
+            ViewBag.folderName = folderName;
+            ViewBag.boolValues = essentialValues;
             return View();
         }
     }

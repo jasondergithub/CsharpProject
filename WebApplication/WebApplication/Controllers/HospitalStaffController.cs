@@ -34,7 +34,9 @@ namespace WebApplication.Controllers
             if (ModelState.IsValid)
             {
                 Session["department"] = "200";
+                Session["hospitalUser"] = "Chu";
                 string x = Session["department"].ToString();
+                string y = Session["hospitalUser"].ToString();
                 /* 流水號*/
                 newProject.project.projectNo = projectService.getProjectNo(x);
                 /*時間 (yyyy/MM/dd)*/
@@ -64,6 +66,14 @@ namespace WebApplication.Controllers
             drop_down = projectService.getCompanyName();
             ViewBag.drop_list = drop_down;
 
+            return View();
+        }
+        public ActionResult SearchProject()
+        {
+            Session["user"] = "Chu";
+            string user = Session["user"].ToString();
+            List<Project> projects = projectService.getProjetctByUser(user);
+            ViewBag.projects = projects;
             return View();
         }
     }

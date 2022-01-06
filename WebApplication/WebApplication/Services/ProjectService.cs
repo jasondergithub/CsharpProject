@@ -151,5 +151,102 @@ namespace WebApplication.Services
             string Id = Genre + Date + Season + Department + strNum;
             return Id;
         }
+        public List<Project> getProjetctByUser(string user)
+        {
+            List<Project> projects = new List<Project>();
+            SqlConnection sqlConnection = new SqlConnection(connStr);
+            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Project Where hospitalUser=@hospitalUser");
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.Add(new SqlParameter("@hospitalUser", user));
+            sqlConnection.Open();
+            try
+            {
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Project project = new Project
+                        {
+                            projectId = reader.GetString(reader.GetOrdinal("projectId")),
+                            usage = reader.GetString(reader.GetOrdinal("usage"))
+                        };
+                        projects.Add(project);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                //丟出錯誤
+                throw new Exception(e.Message.ToString());
+            }
+            sqlConnection.Close();
+            return projects;
+        }
+        public List<Project> getProjetctByCompany(string user)
+        {
+            List<Project> projects = new List<Project>();
+            SqlConnection sqlConnection = new SqlConnection(connStr);
+            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Project Where CompanyId=@CompanyId");
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.Add(new SqlParameter("@CompanyId", user));
+            sqlConnection.Open();
+            try
+            {
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Project project = new Project
+                        {
+                            projectId = reader.GetString(reader.GetOrdinal("projectId")),
+                            usage = reader.GetString(reader.GetOrdinal("usage")),
+                            checkAB = reader.GetBoolean(reader.GetOrdinal("checkAB"))
+                        };
+                        projects.Add(project);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                //丟出錯誤
+                throw new Exception(e.Message.ToString());
+            }
+            sqlConnection.Close();
+            return projects;
+        }
+        public List<bool> getEssentialValue(string projectId)
+        {
+            List<bool> essentialValueList  = new List<bool>();
+            SqlConnection sqlConnection = new SqlConnection(connStr);
+            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM essentialAndReason Where projectId=@projectId");
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.Add(new SqlParameter("@projectId", projectId));
+            sqlConnection.Open();
+            try
+            {
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    for(int i = 1; i < 22; i++)
+                    {
+                        bool value;
+                        value = reader.GetBoolean(i);
+                        essentialValueList.Add(value);
+                    }
+                    //System.Diagnostics.Debug.WriteLine(essentialValueList[1]);
+                }
+            }
+            catch (Exception e)
+            {
+                //丟出錯誤
+                throw new Exception(e.Message.ToString());
+            }
+           
+            return essentialValueList;
+
+        }
     }
 }

@@ -86,10 +86,10 @@ namespace WebApplication.Controllers
                 else
                 {
                     ViewBag.notEnoughPhoto = false;
-                    //新建Members, 
+                    /* 新建Members */
                     Members newMember = new Members();
                     newMember.companyName = RegisterMember.newMember.companyName;
-                    newMember.companyId = RegisterMember.newMember.companyId;                             //帳號
+                    newMember.companyId = RegisterMember.newMember.companyId;                             /* 帳號 */
                     newMember.password = RegisterMember.newMember.password;
                     newMember.companyLeader = RegisterMember.newMember.companyLeader;
                     newMember.companyAddress = RegisterMember.newMember.companyAddress;
@@ -105,13 +105,13 @@ namespace WebApplication.Controllers
                     newMember.isMember = RegisterMember.newMember.isMember;
 
 
-                    //呼叫MemberDBService.cs中的Register創建公司資料表
+                    /* 呼叫MemberDBService.cs中的Register創建公司資料表 */ 
                     ViewBag.accountExist = membersDBServices.Register(newMember);
-                    // 呼叫createDirectory.cs 中的createDir 創建資料夾
+                    /* 呼叫createDirectory.cs 中的createDir 創建資料夾 */
                     if (!ViewBag.accountExist)
                     {
                         ViewBag.DirCreateSucc = createDirectory.createDir(newMember.companyId);
-                        //建立公司(統編)資料夾下的三個資料夾 (1->販售許可(sp),  2->3個月(3m),  3->公司證(cp) 4->產品目錄(pd))
+                        /* 建立公司(統編)資料夾下的三個資料夾 (1->販售許可(sp),  2->3個月(3m),  3->公司證(cp) 4->產品目錄(pd)) */
                         List<string> myStringLists = new List<string>();
                         myStringLists.Add("sp");
                         myStringLists.Add("3m");

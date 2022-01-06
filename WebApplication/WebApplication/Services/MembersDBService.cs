@@ -35,7 +35,7 @@ namespace WebApplication.Services
         {
             Members Data = new Members();
             SqlConnection sqlConnection = new SqlConnection(connStr);
-            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Company WHERE companyId = @companyId");
+            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Company WHERE companyId = @companyId"); // 你的@呢?
             sqlCommand.Connection = sqlConnection;
             sqlCommand.Parameters.Add(new SqlParameter("@companyId", companyId));
             sqlConnection.Open();
@@ -142,7 +142,7 @@ namespace WebApplication.Services
                 //執行Sql指令
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception e)
+            catch //(Exception e)
             {
                 //丟出錯誤
                 //throw new Exception(e.Message.ToString());
