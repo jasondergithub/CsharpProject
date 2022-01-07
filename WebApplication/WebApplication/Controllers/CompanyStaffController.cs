@@ -94,11 +94,14 @@ namespace WebApplication.Controllers
         public ActionResult UploadFile(string projectId)
         {
             List<bool> essentialValues = dbmanger.getEssentialValue(projectId);
-            List <string > essentiallabels = new List<string>(){ "試用報告", "給付限制文件","產品圖檔","衛福部許可證"
-                ,"自費特材療效比較表","健保/自費收載","新進自費衛材售價申請書","自費特材保證切結書","自費收載價格參考"
-                ,"衛材滅菌檢驗報告單","產品品質保證書","報價單","產品授權代理書","產品目錄","其他醫院使用證明"
-                ,"內含(處置治療表)","公會會員證書號","工廠登記證","審議資格簽核單","醫療法21條","User理由"};  
-            List<string> folderName = new List<string>() ;
+            //List <string > essentiallabels = new List<string>(){ "試用報告", "給付限制文件","產品圖檔","衛福部許可證"
+            //    ,"自費特材療效比較表","健保/自費收載","新進自費衛材售價申請書","自費特材保證切結書","自費收載價格參考"
+            //    ,"衛材滅菌檢驗報告單","產品品質保證書","報價單","產品授權代理書","產品目錄","其他醫院使用證明"
+            //    ,"內含(處置治療表)","公會會員證書號","工廠登記證","審議資格簽核單","醫療法21條","User理由"};
+            List<string> essentiallabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
+                              "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",
+                              "reasonN", "reasonO", "reasonP", "reasonQ", "reasonR", "reasonS", "reasonT", "reasonU"};
+            List<string> folderName = new List<string>();
             for (int i = 0; i < 21; i++)
             {
                 if (essentialValues[i]&&i!=0&&i!=18&&i!=20)
@@ -108,7 +111,7 @@ namespace WebApplication.Controllers
                 }
             }
             ViewBag.folderName = folderName;
-            ViewBag.boolValues = essentialValues;
+            //ViewBag.boolValues = essentialValues;
             return View();
         }
     }
