@@ -19,8 +19,8 @@ namespace WebApplication.Services
         {
             SqlConnection sqlConnection = new SqlConnection(connStr);
             SqlCommand sqlCommand = new SqlCommand(
-                @"INSERT INTO Project (projectId, projectGenre,time,season,projectNo,department,checkAB,judgeState,CompanyId,buyReason,usage,predictOfUsePerMonth,recommandId)
-                VALUES (@projectId, @projectGenre,@time,@season,@projectNo,@department,@checkAB,@judgeState,@CompanyId,@buyReason,@usage,@predictOfUsePerMonth,@recommandId)");
+                @"INSERT INTO Project (projectId, projectGenre,time,season,projectNo,hospitalUser,department,checkAB,judgeState,CompanyId,buyReason,usage,predictOfUsePerMonth,recommandId)
+                VALUES (@projectId, @projectGenre,@time,@season,@projectNo,@hospitalUser,@department,@checkAB,@judgeState,@CompanyId,@buyReason,@usage,@predictOfUsePerMonth,@recommandId)");
             sqlCommand.Connection = sqlConnection;
             sqlCommand.Parameters.Add(new SqlParameter("@projectId", newProject.projectId));
             sqlCommand.Parameters.Add(new SqlParameter("@projectGenre", newProject.projectGenre));
@@ -28,6 +28,7 @@ namespace WebApplication.Services
             sqlCommand.Parameters.Add(new SqlParameter("@season", newProject.season));
             sqlCommand.Parameters.Add(new SqlParameter("@projectNo", newProject.projectNo));
             sqlCommand.Parameters.Add(new SqlParameter("@department", newProject.department));
+            sqlCommand.Parameters.Add(new SqlParameter("@hospitalUser", newProject.hospitalUser));
             sqlCommand.Parameters.Add(new SqlParameter("@checkAB", false));
             sqlCommand.Parameters.Add(new SqlParameter("@judgeState", false));
             sqlCommand.Parameters.Add(new SqlParameter("@CompanyId", newProject.companyId));

@@ -45,6 +45,7 @@ namespace WebApplication.Controllers
                 newProject.project.season = projectService.getSeason();
                 /*部門代號*/
                 newProject.project.department = x;
+                newProject.project.hospitalUser = y;
                 newProject.project.projectId = projectService.getProjectId(newProject.project.projectGenre, newProject.project.time, newProject.project.season, newProject.project.department, newProject.project.projectNo);        /*專案編號*/
                 newProject.project.companyId = projectService.getIdByName(newProject.Name);
 
