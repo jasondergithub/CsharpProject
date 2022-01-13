@@ -107,12 +107,35 @@ namespace WebApplication.Controllers
                 if (essentialValues[i]&&i!=0&&i!=18&&i!=20)
                 {
                     folderName.Add(essentiallabels[i]);
-                    System.Diagnostics.Debug.WriteLine(essentiallabels[i]);
+                    // System.Diagnostics.Debug.WriteLine(essentiallabels[i]);
                 }
             }
             ViewBag.folderName = folderName;
             //ViewBag.boolValues = essentialValues;
+            /* 將理由寫入資料庫 */
+            
+
             return View();
         }
+        [HttpPost]
+        public ActionResult UploadFile(Reason reason, string projectId) //
+        {
+            List<bool> essentialValues = dbmanger.getEssentialValue(projectId);
+            List<string> essentiallabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
+                              "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",
+                              "reasonN", "reasonO", "reasonP", "reasonQ", "reasonR", "reasonS", "reasonT", "reasonU"};
+            List<string> folderName = new List<string>();
+            for (int i = 0; i < 21; i++)
+            {
+                if (essentialValues[i] && i != 0 && i != 18 && i != 20)
+                {
+                    folderName.Add(essentiallabels[i]);
+                    //System.Diagnostics.Debug.WriteLine(essentiallabels[i]);
+                }
+            }
+            dbmanger.writeReason2DB(folderName, reason, projectId);
+            return View();
+        }
+
     }
 }

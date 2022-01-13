@@ -2,6 +2,39 @@
 
 @{ ViewBag.Title = "Register"; }
 
+
+<script type="text/javascript">
+    function showUpload(radio)
+    {
+        if (radio.checked == true)
+        {
+            if (radio.value == "工廠")
+            {
+                document.getElementById("factory").style.display = "block"
+            }
+            else if (radio.value == "會員")
+            {
+                document.getElementById("member").style.display = "block"
+            }
+        }
+    }
+    function hideUpload(radio)
+    {
+        if (radio.checked == true)
+        {
+            if (radio.value == "非工廠") {
+                document.getElementById("factory").style.display = "none"
+            }
+            else if (radio.value == "非會員") {
+                document.getElementById("member").style.display = "none"
+            }
+        }
+    }
+
+</script>
+
+
+
 <h2>Register</h2>
 
 
@@ -115,7 +148,8 @@
                 @Html.ValidationMessageFor(model => model.newMember.email5, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
+
+        <div class="form-group factoryType">
             @Html.LabelFor(model => model.newMember.factoryType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <label class="btn">
@@ -133,30 +167,30 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group isFactory">
             @Html.LabelFor(model => model.newMember.isFactory, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <label class="btn">
-                    @Html.RadioButtonFor(model => model.newMember.isFactory, true) 是
+                    @Html.RadioButtonFor(model => model.newMember.isFactory, "工廠", htmlAttributes: new { @onchange = "showUpload(this)" }) 是
                 </label>
 
                 <label class="btn">
-                    @Html.RadioButtonFor(model => model.newMember.isFactory, false) 否
+                    @Html.RadioButtonFor(model => model.newMember.isFactory, "非工廠", htmlAttributes: new { @onchange = "hideUpload(this)" }) 否
                 </label>
 
                 @Html.ValidationMessageFor(model => model.newMember.isFactory, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group isMember">
             @Html.LabelFor(model => model.newMember.isMember, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <label class="btn">
-                    @Html.RadioButtonFor(model => model.newMember.isMember, true) 是
+                    @Html.RadioButtonFor(model => model.newMember.isMember, "會員", htmlAttributes: new { @onchange = "showUpload(this)" }) 是
                 </label>
 
                 <label class="btn">
-                    @Html.RadioButtonFor(model => model.newMember.isMember, false) 否
+                    @Html.RadioButtonFor(model => model.newMember.isMember, "非會員", htmlAttributes: new { @onchange = "hideUpload(this)" }) 否
                 </label>
                 @Html.ValidationMessageFor(model => model.newMember.isMember, "", new { @class = "text-danger" })
             </div>
@@ -182,6 +216,16 @@
 
                 <p>
                     請上傳產品目錄
+                    <input type="file" name="photos" />
+                </p>
+
+                <p id="factory" style="display:none">
+                    請上傳工廠登記證
+                    <input type="file" name="photos" />
+                </p>
+
+                <p id="member" style="display:none">
+                    請上傳公會會員證書號
                     <input type="file" name="photos" />
                 </p>
 

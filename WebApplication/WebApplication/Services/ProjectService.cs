@@ -4,9 +4,11 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication.Models;
+using WebApplication.ViewModels;
 
 namespace WebApplication.Services
 {
@@ -17,32 +19,32 @@ namespace WebApplication.Services
         //新增Project
         public void Createproject(Project newProject) //, string name)
         {
-            SqlConnection sqlConnection = new SqlConnection(connStr);
-            SqlCommand sqlCommand = new SqlCommand(
+            SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand(
                 @"INSERT INTO Project (projectId, projectGenre,time,season,projectNo,hospitalUser,department,checkAB,judgeState,CompanyId,buyReason,usage,predictOfUsePerMonth,recommandId)
                 VALUES (@projectId, @projectGenre,@time,@season,@projectNo,@hospitalUser,@department,@checkAB,@judgeState,@CompanyId,@buyReason,@usage,@predictOfUsePerMonth,@recommandId)");
-            sqlCommand.Connection = sqlConnection;
-            sqlCommand.Parameters.Add(new SqlParameter("@projectId", newProject.projectId));
-            sqlCommand.Parameters.Add(new SqlParameter("@projectGenre", newProject.projectGenre));
-            sqlCommand.Parameters.Add(new SqlParameter("@time", newProject.time));
-            sqlCommand.Parameters.Add(new SqlParameter("@season", newProject.season));
-            sqlCommand.Parameters.Add(new SqlParameter("@projectNo", newProject.projectNo));
-            sqlCommand.Parameters.Add(new SqlParameter("@department", newProject.department));
-            sqlCommand.Parameters.Add(new SqlParameter("@hospitalUser", newProject.hospitalUser));
-            sqlCommand.Parameters.Add(new SqlParameter("@checkAB", false));
-            sqlCommand.Parameters.Add(new SqlParameter("@judgeState", false));
-            sqlCommand.Parameters.Add(new SqlParameter("@CompanyId", newProject.companyId));
-            sqlCommand.Parameters.Add(new SqlParameter("@buyReason", newProject.buyReason));
-            sqlCommand.Parameters.Add(new SqlParameter("@usage", newProject.usage));
-            sqlCommand.Parameters.Add(new SqlParameter("@predictOfUsePerMonth", newProject.predictOfUsePerMonth));
-            sqlCommand.Parameters.Add(new SqlParameter("@recommandId", newProject.recommandId));
+            cmd.Connection = conn;
+            cmd.Parameters.Add(new SqlParameter("@projectId", newProject.projectId));
+            cmd.Parameters.Add(new SqlParameter("@projectGenre", newProject.projectGenre));
+            cmd.Parameters.Add(new SqlParameter("@time", newProject.time));
+            cmd.Parameters.Add(new SqlParameter("@season", newProject.season));
+            cmd.Parameters.Add(new SqlParameter("@projectNo", newProject.projectNo));
+            cmd.Parameters.Add(new SqlParameter("@department", newProject.department));
+            cmd.Parameters.Add(new SqlParameter("@hospitalUser", newProject.hospitalUser));
+            cmd.Parameters.Add(new SqlParameter("@checkAB", false));
+            cmd.Parameters.Add(new SqlParameter("@judgeState", false));
+            cmd.Parameters.Add(new SqlParameter("@CompanyId", newProject.companyId));
+            cmd.Parameters.Add(new SqlParameter("@buyReason", newProject.buyReason));
+            cmd.Parameters.Add(new SqlParameter("@usage", newProject.usage));
+            cmd.Parameters.Add(new SqlParameter("@predictOfUsePerMonth", newProject.predictOfUsePerMonth));
+            cmd.Parameters.Add(new SqlParameter("@recommandId", newProject.recommandId));
             //確保程式不會因執行錯誤而中斷
             try
             {
                 //資料庫連線
-                sqlConnection.Open();
+                conn.Open();
                 //執行Sql指令
-                sqlCommand.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception e)
             {
@@ -51,16 +53,16 @@ namespace WebApplication.Services
             }
             finally
             {
-                sqlConnection.Close();
+                conn.Close();
             }
 
         }
         public List<string> getCompanyName()
         {
-            SqlConnection sqlConnection = new SqlConnection();
-            sqlConnection.ConnectionString = connStr;
+            SqlConnection conn = new SqlConnection(connStr);
+            // conn.ConnectionString = connStr;
             DataSet ds = new DataSet();
-            SqlDataAdapter daCompany = new SqlDataAdapter("SELECT DISTINCT companyName FROM Company", sqlConnection);
+            SqlDataAdapter daCompany = new SqlDataAdapter("SELECT DISTINCT companyName FROM Company", conn);
             daCompany.Fill(ds);
             DataTable dt = ds.Tables [0];
             List<string> result = new List<string>();
@@ -74,12 +76,12 @@ namespace WebApplication.Services
         public string getIdByName(string name)
         {
             string id;
-            SqlConnection sqlConnection = new SqlConnection();
-            sqlConnection.ConnectionString = connStr;
-            SqlCommand sqlCommand = new SqlCommand("SELECT companyId FROM Company WHERE companyName=@companyName", 
-                sqlConnection);
-            sqlCommand.Parameters.Add(new SqlParameter("@companyName", SqlDbType.NVarChar)).Value = name;            
-            SqlDataAdapter adp = new SqlDataAdapter(sqlCommand);
+            SqlConnection conn = new SqlConnection(connStr);
+            // sqlConnection.ConnectionString = connStr;
+            SqlCommand cmd = new SqlCommand("SELECT companyId FROM Company WHERE companyName=@companyName",
+                conn);
+            cmd.Parameters.Add(new SqlParameter("@companyName", SqlDbType.NVarChar)).Value = name;            
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             adp.Fill(ds);
             DataTable dt = ds.Tables[0];
@@ -120,17 +122,17 @@ namespace WebApplication.Services
         /* 取得流水號 */
         public int getProjectNo(string departmentCheck)
         {
-            SqlConnection sqlConnection = new SqlConnection(connStr);
+            SqlConnection conn = new SqlConnection(connStr);
             /* 找到當前流水號最大值 */
-            SqlCommand sqlCommand = new SqlCommand(@"SELECT MAX(projectNo) FROM Project WHERE department=@value1");
-            sqlCommand.Connection = sqlConnection;
-            sqlCommand.Parameters.Add(new SqlParameter("@value1", departmentCheck));
+            SqlCommand cmd = new SqlCommand(@"SELECT MAX(projectNo) FROM Project WHERE department=@value1");
+            cmd.Connection = conn;
+            cmd.Parameters.Add(new SqlParameter("@value1", departmentCheck));
             try
             {
-                sqlConnection.Open();
+                conn.Open();
                 //SqlDataReader reader = sqlCommand.ExecuteReader();
                 //reader.Read();
-                int temp = (int)sqlCommand.ExecuteScalar();
+                int temp = (int)cmd.ExecuteScalar();
                 temp ++;
                 return temp;
             }
@@ -141,7 +143,7 @@ namespace WebApplication.Services
             }
             finally
             {
-                sqlConnection.Close();
+                conn.Close();
             }
         }
 
@@ -155,14 +157,14 @@ namespace WebApplication.Services
         public List<Project> getProjetctByUser(string user)
         {
             List<Project> projects = new List<Project>();
-            SqlConnection sqlConnection = new SqlConnection(connStr);
-            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Project Where hospitalUser=@hospitalUser");
-            sqlCommand.Connection = sqlConnection;
-            sqlCommand.Parameters.Add(new SqlParameter("@hospitalUser", user));
-            sqlConnection.Open();
+            SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Project Where hospitalUser=@hospitalUser");
+            cmd.Connection = conn;
+            cmd.Parameters.Add(new SqlParameter("@hospitalUser", user));
+            conn.Open();
             try
             {
-                SqlDataReader reader = sqlCommand.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -181,20 +183,20 @@ namespace WebApplication.Services
                 //丟出錯誤
                 throw new Exception(e.Message.ToString());
             }
-            sqlConnection.Close();
+            conn.Close();
             return projects;
         }
         public List<Project> getProjetctByCompany(string user)
         {
             List<Project> projects = new List<Project>();
-            SqlConnection sqlConnection = new SqlConnection(connStr);
-            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Project Where CompanyId=@CompanyId");
-            sqlCommand.Connection = sqlConnection;
-            sqlCommand.Parameters.Add(new SqlParameter("@CompanyId", user));
-            sqlConnection.Open();
+            SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Project Where CompanyId=@CompanyId");
+            cmd.Connection = conn;
+            cmd.Parameters.Add(new SqlParameter("@CompanyId", user));
+            conn.Open();
             try
             {
-                SqlDataReader reader = sqlCommand.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -214,20 +216,20 @@ namespace WebApplication.Services
                 //丟出錯誤
                 throw new Exception(e.Message.ToString());
             }
-            sqlConnection.Close();
+            conn.Close();
             return projects;
         }
         public List<bool> getEssentialValue(string projectId)
         {
             List<bool> essentialValueList  = new List<bool>();
-            SqlConnection sqlConnection = new SqlConnection(connStr);
-            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM essentialAndReason Where projectId=@projectId");
-            sqlCommand.Connection = sqlConnection;
-            sqlCommand.Parameters.Add(new SqlParameter("@projectId", projectId));
-            sqlConnection.Open();
+            SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM essentialAndReason Where projectId=@projectId");
+            cmd.Connection = conn;
+            cmd.Parameters.Add(new SqlParameter("@projectId", projectId));
+            conn.Open();
             try
             {
-                SqlDataReader reader = sqlCommand.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
                     reader.Read();
@@ -249,5 +251,53 @@ namespace WebApplication.Services
             return essentialValueList;
 
         }
+
+        public void writeReason2DB(List<string> reasonNames, Reason reasons, string projectId) 
+        {
+            System.Diagnostics.Debug.WriteLine(projectId);
+            SqlConnection conn = new SqlConnection(connStr);
+            string cmdStr = "UPDATE essentialAndReason SET ";
+            int i = 0;
+            foreach(PropertyInfo prop in typeof(Reason).GetProperties())
+            {
+                //System.Diagnostics.Debug.WriteLine(prop.GetValue(reasons));
+                //System.Diagnostics.Debug.WriteLine(prop.Name);
+                if (prop.GetValue(reasons)!=null)
+                    //cmdStr = cmdStr + prop.Name + '='+ prop.GetValue(reasons) + ',';
+                    cmdStr = cmdStr + prop.Name + '='+'@'+ prop.Name + ',';
+                i++;
+            }
+
+            cmdStr = cmdStr.TrimEnd(',')+' ';
+            cmdStr = cmdStr + "WHERE projectId=@projectId";
+            System.Diagnostics.Debug.WriteLine(cmdStr);
+
+
+            SqlCommand cmd = new SqlCommand((@cmdStr));
+            cmd.Connection = conn;
+            
+            foreach (PropertyInfo prop in typeof(Reason).GetProperties())
+            {
+                if (prop.GetValue(reasons) != null)
+                    //cmd.Parameters.Add(new SqlParameter("@password", newMember.password));
+                    cmd.Parameters.Add(new SqlParameter("@"+ prop.Name, prop.GetValue(reasons)));
+            }
+            cmd.Parameters.Add(new SqlParameter("@projectId", projectId));
+
+            try
+            {
+                conn.Open();    /* 開啟資料庫連線 */
+                cmd.ExecuteNonQuery();   /* 執行Sql指令 */
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message.ToString());  /* 丟出錯誤 */
+            }
+            finally
+            {
+                conn.Close();   /* 關閉資料庫連線 */
+            }
+        }
+
     }
 }

@@ -66,10 +66,10 @@ namespace WebApplication.Models
         public string factoryType { get; set; }
         [DisplayName("是否為工廠")]
         [Required(ErrorMessage = "此欄位為必填欄位")]
-        public bool isFactory { get; set; }
+        public string isFactory { get; set; }
         [DisplayName("是否為醫療器材商業同業公會會員")]
         [Required(ErrorMessage = "此欄位為必填欄位")]
-        public bool isMember { get; set; }
+        public string isMember { get; set; }
 
     }
 }

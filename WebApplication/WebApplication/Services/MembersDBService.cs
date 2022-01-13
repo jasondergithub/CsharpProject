@@ -34,12 +34,12 @@ namespace WebApplication.Services
         private Members getDataByAccount(string companyId)
         {
             Members Data = new Members();
-            SqlConnection sqlConnection = new SqlConnection(connStr);
-            SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Company WHERE companyId = @companyId"); // 你的@呢?
-            sqlCommand.Connection = sqlConnection;
-            sqlCommand.Parameters.Add(new SqlParameter("@companyId", companyId));
-            sqlConnection.Open();
-            SqlDataReader reader = sqlCommand.ExecuteReader();
+            SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Company WHERE companyId = @companyId"); // 你的@呢?
+            cmd.Connection = conn;
+            cmd.Parameters.Add(new SqlParameter("@companyId", companyId));
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             try
             {
@@ -64,7 +64,7 @@ namespace WebApplication.Services
             }
             finally
             {
-                sqlConnection.Close();
+                conn.Close();
             }
             return Data;
         }
