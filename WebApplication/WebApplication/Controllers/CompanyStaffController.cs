@@ -14,6 +14,7 @@ namespace WebApplication.Controllers
     {
         private readonly ProjectService dbmanger = new ProjectService();
         private readonly CheckDBList checkDBList = new CheckDBList();
+        private readonly uploadFileService uploadManager = new uploadFileService();
         //登出
         [Authorize(Roles = "CompanyStaff")]
         public ActionResult Logout()
@@ -113,22 +114,33 @@ namespace WebApplication.Controllers
             ViewBag.folderName = folderName;
             //ViewBag.boolValues = essentialValues;
             /* 將理由寫入資料庫 */
-            
 
+            Session["projectId"] = projectId;
             return View();
         }
         [HttpPost]
-        public ActionResult UploadFile(Reason reason, string projectId) //
+        public ActionResult UploadFile( Reason reason,  HttpPostedFileBase[] photos) //
         {
+            string projectId =Session["projectId"].ToString();
+            System.Diagnostics.Debug.WriteLine(projectId);
             List<bool> essentialValues = dbmanger.getEssentialValue(projectId);
+
             List<string> essentiallabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
                               "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",
                               "reasonN", "reasonO", "reasonP", "reasonQ", "reasonR", "reasonS", "reasonT", "reasonU"};
+            string SubpathToProject = dbmanger.getCompanyIdbyProjectId(projectId) + "/" + projectId;
+
             List<string> folderName = new List<string>();
             for (int i = 0; i < 21; i++)
             {
                 if (essentialValues[i] && i != 0 && i != 18 && i != 20)
                 {
+                    if ((HttpPostedFileBase)photos[i] != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine(SubpathToProject + '/'+ essentiallabels[i][essentiallabels[i].Length - 1]);
+                        uploadManager.UploadToFtp(photos[i], SubpathToProject + essentiallabels[i][essentiallabels[i].Length-1]);
+                    }
+                        
                     folderName.Add(essentiallabels[i]);
                     //System.Diagnostics.Debug.WriteLine(essentiallabels[i]);
                 }

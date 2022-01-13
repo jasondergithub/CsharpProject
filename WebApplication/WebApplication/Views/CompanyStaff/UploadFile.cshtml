@@ -16,278 +16,281 @@
 </script>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("UploadFile", "CompanyStaff",FormMethod.Post, new { enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
+
     <h1>檔案上傳</h1>
     <body onload="showEssentialFile()">
+ 
         <table class="table">
-            <thead>
-                <tr>
-                    <th>上傳內容</th>
-                    <th>檔案上傳</th>
-                    <th>未上傳理由</th>
-                </tr>
-            </thead>
-            <tbody>
+                <thead>
+                    <tr>
+                        <th>上傳內容</th>
+                        <th>檔案上傳</th>
+                        <th>未上傳理由</th>
+                    </tr>
+                </thead>
 
-                <tr id="reasonA" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonA, htmlAttributes: new { @class = "control-label"})
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonA, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                <tbody>
+                    <tr id="reasonA" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonA, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonA, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonB"  style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonB, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonB, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonB" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonB, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonB, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonC" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonC, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonC, new { htmlAttributes = new { @class = "form-control"} })
-                    </td>
-                </tr>
+                    <tr id="reasonC" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonC, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonC, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonD" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonD, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonD, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonD" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonD, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonD, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonE" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonE, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonE, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonE" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonE, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonE, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonF" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonF, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonF, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonF" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonF, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonF, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonG" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonG, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonG, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonG" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonG, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonG, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonH" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonH, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonH, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonH" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonH, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonH, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonI" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonI, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonI, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonI" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonI, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonI, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonJ" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonJ, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonJ, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonJ" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonJ, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonJ, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonK" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonK, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonK, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonK" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonK, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonK, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonL" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonL, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonL, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonL" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonL, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonL, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonM" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonM, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonM, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonM" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonM, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonM, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonN" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonN, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonN, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonN" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonN, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonN, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonO" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonO, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonO, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonO" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonO, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonO, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonP" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonP, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonP, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonP" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonP, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonP, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonQ" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonQ, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonQ, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonQ" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonQ, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonQ, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonR" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonR, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonR, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonR" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonR, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonR, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonS" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonS, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonS, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonS" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonS, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonS, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonT" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonT, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonT, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonT" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonT, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonT, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
-                <tr id="reasonU" style="display: none;">
-                    <td>
-                        @Html.LabelFor(model => model.reasonU, htmlAttributes: new { @class = "control-label" })
-                    </td>
-                    <td>
-                        <input type="file" name="photos" />
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.reasonU, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
+                    <tr id="reasonU" style="display: none;">
+                        <td>
+                            @Html.LabelFor(model => model.reasonU, htmlAttributes: new { @class = "control-label" })
+                        </td>
+                        <td>
+                            <input type="file" name="photos" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.reasonU, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
 
 
-            </tbody>
+                </tbody>
 
-        </table>
-    </body>
+            </table>
+
+</body>
 
     <div class="form-group">
         <div class="col-md-offset-5 col-md-7">

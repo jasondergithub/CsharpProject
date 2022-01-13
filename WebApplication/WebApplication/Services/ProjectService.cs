@@ -247,56 +247,90 @@ namespace WebApplication.Services
                 //丟出錯誤
                 throw new Exception(e.Message.ToString());
             }
-           
+            conn.Close();
             return essentialValueList;
 
         }
 
-        public void writeReason2DB(List<string> reasonNames, Reason reasons, string projectId) 
+        public string getCompanyIdbyProjectId(string projectId)
         {
-            System.Diagnostics.Debug.WriteLine(projectId);
+            string CompanyId;
             SqlConnection conn = new SqlConnection(connStr);
-            string cmdStr = "UPDATE essentialAndReason SET ";
-            int i = 0;
-            foreach(PropertyInfo prop in typeof(Reason).GetProperties())
-            {
-                //System.Diagnostics.Debug.WriteLine(prop.GetValue(reasons));
-                //System.Diagnostics.Debug.WriteLine(prop.Name);
-                if (prop.GetValue(reasons)!=null)
-                    //cmdStr = cmdStr + prop.Name + '='+ prop.GetValue(reasons) + ',';
-                    cmdStr = cmdStr + prop.Name + '='+'@'+ prop.Name + ',';
-                i++;
-            }
-
-            cmdStr = cmdStr.TrimEnd(',')+' ';
-            cmdStr = cmdStr + "WHERE projectId=@projectId";
-            System.Diagnostics.Debug.WriteLine(cmdStr);
-
-
-            SqlCommand cmd = new SqlCommand((@cmdStr));
+            SqlCommand cmd = new SqlCommand("SELECT CompanyId FROM Project Where projectId=@projectId");
             cmd.Connection = conn;
-            
-            foreach (PropertyInfo prop in typeof(Reason).GetProperties())
-            {
-                if (prop.GetValue(reasons) != null)
-                    //cmd.Parameters.Add(new SqlParameter("@password", newMember.password));
-                    cmd.Parameters.Add(new SqlParameter("@"+ prop.Name, prop.GetValue(reasons)));
-            }
             cmd.Parameters.Add(new SqlParameter("@projectId", projectId));
-
+            conn.Open();
             try
             {
-                conn.Open();    /* 開啟資料庫連線 */
-                cmd.ExecuteNonQuery();   /* 執行Sql指令 */
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                CompanyId = reader.GetString(0);
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message.ToString());  /* 丟出錯誤 */
+                //丟出錯誤
+                throw new Exception(e.Message.ToString());
             }
             finally
             {
-                conn.Close();   /* 關閉資料庫連線 */
+                conn.Close();
             }
+            System.Diagnostics.Debug.WriteLine(CompanyId);
+            return CompanyId;
+        }
+
+        public void writeReason2DB(List<string> reasonNames, Reason reasons, string projectId) 
+        {
+            //System.Diagnostics.Debug.WriteLine(projectId);
+            SqlConnection conn = new SqlConnection(connStr);
+            string cmdStr = "UPDATE essentialAndReason SET ";
+            int i = 0;
+            bool writeValue = false;
+            foreach (PropertyInfo prop in typeof(Reason).GetProperties())
+            {
+                //System.Diagnostics.Debug.WriteLine(prop.GetValue(reasons));
+                //System.Diagnostics.Debug.WriteLine(prop.Name);
+                if (prop.GetValue(reasons) != null)
+                {       //cmdStr = cmdStr + prop.Name + '='+ prop.GetValue(reasons) + ',';
+                    cmdStr = cmdStr + prop.Name + '=' + '@' + prop.Name + ',';
+                    writeValue = true;
+                }
+                i++;
+            }
+            if (writeValue)
+            {
+                cmdStr = cmdStr.TrimEnd(',')+' ';
+                cmdStr = cmdStr + "WHERE projectId=@projectId";
+                //System.Diagnostics.Debug.WriteLine(cmdStr);
+
+                SqlCommand cmd = new SqlCommand((@cmdStr));
+                cmd.Connection = conn;
+            
+                foreach (PropertyInfo prop in typeof(Reason).GetProperties())
+                {
+                    if (prop.GetValue(reasons) != null)
+                        //cmd.Parameters.Add(new SqlParameter("@password", newMember.password));
+                        cmd.Parameters.Add(new SqlParameter("@"+ prop.Name, prop.GetValue(reasons)));
+                    
+                }
+                cmd.Parameters.Add(new SqlParameter("@projectId", projectId));
+                System.Diagnostics.Debug.WriteLine(cmdStr);
+            
+                    try
+                    {
+                        conn.Open();    /* 開啟資料庫連線 */
+                        cmd.ExecuteNonQuery();   /* 執行Sql指令 */
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception(e.Message.ToString());  /* 丟出錯誤 */
+                    }
+                    finally
+                    {
+                        conn.Close();   /* 關閉資料庫連線 */
+                    }
+            }
+            
         }
 
     }

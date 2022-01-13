@@ -117,6 +117,8 @@ namespace WebApplication.Controllers
                         myStringLists.Add("3m");
                         myStringLists.Add("cp");
                         myStringLists.Add("pd");
+                        myStringLists.Add("rc");
+                        myStringLists.Add("amcn");
 
                         foreach (string i in myStringLists)
                         {
@@ -125,8 +127,11 @@ namespace WebApplication.Controllers
                         }
                         for (int order = 0; order < myStringLists.Count(); order++)
                         {
-                            HttpPostedFileBase f = (HttpPostedFileBase)photos[order];
-                            uploadObject.UploadToFtp(f, newMember.companyId, order + 1);
+                            if((HttpPostedFileBase)photos[order] != null)
+                            {
+                                HttpPostedFileBase f = (HttpPostedFileBase)photos[order];
+                                uploadObject.UploadToFtp(f, newMember.companyId, order + 1);
+                            }
                         }
                     }
                     else
