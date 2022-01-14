@@ -56,6 +56,8 @@ namespace WebApplication.Services
 
         public void UploadToFtp(HttpPostedFileBase uploadfile, string folderName)
         {
+            System.Diagnostics.Debug.WriteLine(folderName);
+
             var uploadurl = "ftp://140.124.183.13/" + folderName + "/";
             var uploadfilename = uploadfile.FileName;
             var username = "ftpuser";
@@ -67,6 +69,9 @@ namespace WebApplication.Services
             streamObj.Close();
             //streamObj = null;
             string ftpurl = String.Format("{0}/{1}", uploadurl, uploadfilename);
+
+            System.Diagnostics.Debug.WriteLine(ftpurl);
+            
             var requestObj = FtpWebRequest.Create(ftpurl) as FtpWebRequest;
             requestObj.Method = WebRequestMethods.Ftp.UploadFile;
             requestObj.Credentials = new NetworkCredential(username, password);

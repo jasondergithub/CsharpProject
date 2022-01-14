@@ -332,6 +332,105 @@ namespace WebApplication.Services
             }
             
         }
+        public List<Project> getProjetctJudgeState()
+        {
+            List<Project> projects = new List<Project>();
+            SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Project Where judgeState=@judgeState");
+            cmd.Connection = conn;
+            cmd.Parameters.Add(new SqlParameter("@judgeState", true));
+            conn.Open();
+            try
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Project project = new Project
+                        {
+                            projectId = reader.GetString(reader.GetOrdinal("projectId")),
+                            usage = reader.GetString(reader.GetOrdinal("usage")),
+                            companyName = getNameById(reader.GetString(reader.GetOrdinal("companyId"))),
+                            department = reader.GetString(reader.GetOrdinal("department")),
+                            hospitalUser = reader.GetString(reader.GetOrdinal("hospitalUser"))
+                        };
+                        projects.Add(project);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                //丟出錯誤
+                throw new Exception(e.Message.ToString());
+            }
+            conn.Close();
+            return projects;
+        }
+
+        public string getNameById(string companyId)
+        {
+            string name;
+            SqlConnection conn = new SqlConnection(connStr);
+            // sqlConnection.ConnectionString = connStr;
+            SqlCommand cmd = new SqlCommand("SELECT companyName FROM Company WHERE companyId=@companyId",
+                conn);
+            cmd.Parameters.Add(new SqlParameter("@companyId", SqlDbType.NVarChar)).Value = companyId;
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            adp.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            name = dt.Rows[0][0].ToString();
+            return name;
+        }
+        public List<string> getReasonByporjectId(string projectId)
+        {
+            List<string> reasons = new List<string>();
+            List<string> reasonlabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
+                              "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",
+                              "reasonN", "reasonO", "reasonP", "reasonQ", "reasonR", "reasonS", "reasonT", "reasonU"};
+            SqlConnection conn = new SqlConnection(connStr);
+            string cmdStr = "SELECT reasonA, reasonB, reasonC, reasonD, reasonE, reasonF, reasonG, reasonH, reasonI, reasonJ, reasonK, " +
+                                   "reasonL, reasonM, reasonN, reasonO, reasonP, reasonQ, reasonR, reasonS, reasonT, reasonU " +
+                                   "FROM essentialAndReason Where projectId=@projectId";
+            
+            System.Diagnostics.Debug.WriteLine(cmdStr);
+
+            SqlCommand cmd = new SqlCommand(@cmdStr);
+            cmd.Connection = conn;
+            cmd.Parameters.Add(new SqlParameter("@projectId", projectId));
+            conn.Open();
+            try
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        foreach (var i in reasonlabels)
+                        {
+                            if (!reader.IsDBNull(reader.GetOrdinal(i)))
+                                reasons.Add(reader.GetString(reader.GetOrdinal(i)));
+                                // System.Diagnostics.Debug.WriteLine(reader.GetString(reader.GetOrdinal(i)));
+                            else
+                                reasons.Add("");
+                        }
+                            
+                            
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                //丟出錯誤
+                throw new Exception(e.Message.ToString());
+            }
+            conn.Close();
+
+            //System.Diagnostics.Debug.WriteLine(reasons);
+            
+            return reasons;
+        }
 
     }
 }

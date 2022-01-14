@@ -15,6 +15,7 @@ namespace WebApplication.Models
         [Required(ErrorMessage = "請選擇專案類型")]
         public string projectGenre { get; set; }
 
+        public string companyName { get; set; }
         public string time { get; set; }
         public string season { get; set; }
         public string department { get; set; }

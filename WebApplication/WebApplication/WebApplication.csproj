@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CompanyStaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalStaffController.cs" />
@@ -169,6 +170,9 @@
     <Content Include="Views\CompanyStaff\CheckList.cshtml" />
     <Content Include="Views\CompanyStaff\SearchProject.cshtml" />
     <Content Include="Views\CompanyStaff\UploadFile.cshtml" />
+    <Content Include="Views\Admin\checkProject.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\SearchProject.cshtml" />
     <None Include="Views\HospitalStaff\index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

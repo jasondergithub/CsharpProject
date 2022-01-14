@@ -137,8 +137,8 @@ namespace WebApplication.Controllers
                 {
                     if ((HttpPostedFileBase)photos[i] != null)
                     {
-                        System.Diagnostics.Debug.WriteLine(SubpathToProject + '/'+ essentiallabels[i][essentiallabels[i].Length - 1]);
-                        uploadManager.UploadToFtp(photos[i], SubpathToProject + essentiallabels[i][essentiallabels[i].Length-1]);
+                        // System.Diagnostics.Debug.WriteLine(SubpathToProject + '/'+ essentiallabels[i][essentiallabels[i].Length - 1]);
+                        uploadManager.UploadToFtp(photos[i], SubpathToProject + '/' + essentiallabels[i][essentiallabels[i].Length - 1]);
                     }
                         
                     folderName.Add(essentiallabels[i]);

@@ -77,5 +77,41 @@ namespace WebApplication.Controllers
             ViewBag.projects = projects;
             return View();
         }
+        public ActionResult UploadFile(string projectId)
+        {
+            List<bool> essentialValues = projectService.getEssentialValue(projectId);
+
+            List<string> essentiallabels = new List<string>() { "reasonA", "reasonS", "reasonU" };
+            List<string> folderName = new List<string>();
+            for (int i = 0; i < 3; i++)
+            {
+                folderName.Add(essentiallabels[i]);
+                // System.Diagnostics.Debug.WriteLine(essentiallabels[i]) 
+            }
+            ViewBag.folderName = folderName;
+            //ViewBag.boolValues = essentialValues;
+            /* 將理由寫入資料庫 */
+
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult UploadFile(Reason reason, string projectId)
+        {
+            List<bool> essentialValues = projectService.getEssentialValue(projectId);
+
+            List<string> essentiallabels = new List<string>() { "reasonA", "reasonS", "reasonU" };
+            List<string> folderName = new List<string>();
+            for (int i = 0; i < 3; i++)
+            {
+                folderName.Add(essentiallabels[i]);
+                // System.Diagnostics.Debug.WriteLine(essentiallabels[i]) 
+            }
+            ViewBag.folderName = folderName;
+            //ViewBag.boolValues = essentialValues;
+            /* 將理由寫入資料庫 */
+            projectService.writeReason2DB(folderName, reason, projectId);
+            return View();
+        }
     }
 }
