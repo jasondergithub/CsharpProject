@@ -275,46 +275,62 @@ namespace WebApplication.Services
             {
                 conn.Close();
             }
-            System.Diagnostics.Debug.WriteLine(CompanyId);
+            //System.Diagnostics.Debug.WriteLine(CompanyId);
             return CompanyId;
         }
 
         public void writeReason2DB(List<string> reasonNames, Reason reasons, string projectId) 
         {
-            //System.Diagnostics.Debug.WriteLine(projectId);
+            
             SqlConnection conn = new SqlConnection(connStr);
             string cmdStr = "UPDATE essentialAndReason SET ";
             int i = 0;
             bool writeValue = false;
-            foreach (PropertyInfo prop in typeof(Reason).GetProperties())
+            writeValue = true;
+            List<string> essentiallabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
+                              "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",
+                              "reasonN", "reasonO", "reasonP", "reasonQ", "reasonR", "reasonS", "reasonT", "reasonU"};
+
+            foreach (var reasonName in reasonNames)
             {
-                //System.Diagnostics.Debug.WriteLine(prop.GetValue(reasons));
-                //System.Diagnostics.Debug.WriteLine(prop.Name);
-                if (prop.GetValue(reasons) != null)
-                {       //cmdStr = cmdStr + prop.Name + '='+ prop.GetValue(reasons) + ',';
-                    cmdStr = cmdStr + prop.Name + '=' + '@' + prop.Name + ',';
-                    writeValue = true;
-                }
-                i++;
+                System.Diagnostics.Debug.WriteLine(reasonName);
+                cmdStr = cmdStr + reasonName + '=' + '@' + reasonName + ',';
+
             }
+                
+
+            //foreach (PropertyInfo prop in typeof(Reason).GetProperties())
+            //{
+            //    //System.Diagnostics.Debug.WriteLine(prop.GetValue(reasons));
+            //    //System.Diagnostics.Debug.WriteLine(prop.Name);
+            //    if (prop.GetValue(reasons) != null)
+            //    {       //cmdStr = cmdStr + prop.Name + '='+ prop.GetValue(reasons) + ',';
+            //        cmdStr = cmdStr + reasonNames[i] + '=' + '@' + reasonNames[i] + ',';
+            //        writeValue = true;
+            //    }
+            //    i++;
+            //}
             if (writeValue)
             {
                 cmdStr = cmdStr.TrimEnd(',')+' ';
                 cmdStr = cmdStr + "WHERE projectId=@projectId";
-                //System.Diagnostics.Debug.WriteLine(cmdStr);
+                System.Diagnostics.Debug.WriteLine(cmdStr);
 
                 SqlCommand cmd = new SqlCommand((@cmdStr));
                 cmd.Connection = conn;
-            
+                i = 0;
                 foreach (PropertyInfo prop in typeof(Reason).GetProperties())
                 {
-                    if (prop.GetValue(reasons) != null)
-                        //cmd.Parameters.Add(new SqlParameter("@password", newMember.password));
-                        cmd.Parameters.Add(new SqlParameter("@"+ prop.Name, prop.GetValue(reasons)));
-                    
+                    if (prop.GetValue(reasons) != null && prop.GetValue(reasons))
+                    {
+                        cmd.Parameters.Add(new SqlParameter("@" + reasonNames[i++], prop.GetValue(reasons)));
+                        System.Diagnostics.Debug.WriteLine(prop.GetValue(reasons));
+                    }
+                        
+
                 }
                 cmd.Parameters.Add(new SqlParameter("@projectId", projectId));
-                System.Diagnostics.Debug.WriteLine(cmdStr);
+                
             
                     try
                     {
@@ -414,9 +430,7 @@ namespace WebApplication.Services
                                 // System.Diagnostics.Debug.WriteLine(reader.GetString(reader.GetOrdinal(i)));
                             else
                                 reasons.Add("");
-                        }
-                            
-                            
+                        }   
                     }
                 }
             }
@@ -426,9 +440,7 @@ namespace WebApplication.Services
                 throw new Exception(e.Message.ToString());
             }
             conn.Close();
-
             //System.Diagnostics.Debug.WriteLine(reasons);
-            
             return reasons;
         }
 

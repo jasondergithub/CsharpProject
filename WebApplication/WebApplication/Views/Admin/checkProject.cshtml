@@ -7,11 +7,14 @@
 
 <script type="text/javascript">
     function showEssentialFile() {
-        var folderNames = @Html.Raw(Json.Encode(@ViewBag.folderName));
-        for (let i = 0; i < folderNames.length; i++)
+        var folders = @Html.Raw(Json.Encode(@ViewBag.notShowFolder));
+        for (let i = 0; i < folders.length; i++)
         {
-            document.getElementById(folderNames[i]).style.display = 'table-row';
+            var tmp = document.getElementById(folders[i]).getElementsByClassName("control-label")[0]
+            //console.log(tmp)
+            tmp.style.color = '#D3D3D3'
         }
+
     }
 
 
@@ -22,10 +25,11 @@
 {
     @Html.AntiForgeryToken()
     <h1>專案審核</h1>
-    <body> @*onload="showEssentialFile()">*@
+    <body onload="showEssentialFile()">
         <table class="table">
             <thead>
                 <tr>
+                    <th>修正</th>
                     <th>上傳項目</th>
                     <th>檔案內容</th>
                     <th>未上傳原因</th>
@@ -36,6 +40,9 @@
 
                 <tr id="reasonA">
                     <td>
+                        @Html.CheckBoxFor(model => model.judgeA, new { Style = "vertical-align:3px}" })
+                    </td>
+                    <td>
                         @Html.LabelFor(model => model.reasonA, htmlAttributes: new { @class = "control-label"})
                     </td>
                     <td>
@@ -45,11 +52,14 @@
                         @ViewBag.reasons[0]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonA, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectA, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonB">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeB, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonB, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -60,11 +70,14 @@
                         @ViewBag.reasons[1]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonB, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectB, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonC">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeC, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonC, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -75,11 +88,14 @@
                         @ViewBag.reasons[2]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonC, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectC, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonD">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeD, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonD, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -90,11 +106,14 @@
                         @ViewBag.reasons[3]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonD, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectD, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonE">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeE, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonE, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -105,11 +124,14 @@
                         @ViewBag.reasons[4]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonE, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectE, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonF">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeF, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonF, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -120,11 +142,14 @@
                         @ViewBag.reasons[5]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonF, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectF, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonG">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeG, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonG, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -135,11 +160,14 @@
                         @ViewBag.reasons[6]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonG, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectG, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonH">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeH, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonH, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -150,11 +178,14 @@
                         @ViewBag.reasons[7]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonH, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectH, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonI">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeI, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonI, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -165,11 +196,14 @@
                         @ViewBag.reasons[8]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonI, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectI, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonJ">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeJ, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonJ, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -180,11 +214,14 @@
                         @ViewBag.reasons[9]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonJ, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectJ, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonK">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeK, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonK, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -195,11 +232,14 @@
                         @ViewBag.reasons[10]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonK, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectK, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonL">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeL, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonL, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -210,11 +250,14 @@
                         @ViewBag.reasons[11]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectL, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonM">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeM, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonM, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -225,11 +268,14 @@
                         @ViewBag.reasons[12]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonM, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectM, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonN">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeN, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonN, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -240,11 +286,14 @@
                         @ViewBag.reasons[13]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectN, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonO">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeO, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonO, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -255,11 +304,14 @@
                         @ViewBag.reasons[14]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonO, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectO, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonP">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeP, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonP, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -270,11 +322,14 @@
                         @ViewBag.reasons[15]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectP, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonQ">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeQ, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonQ, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -285,11 +340,14 @@
                         @ViewBag.reasons[16]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonQ, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectQ, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonR">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeR, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonR, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -300,11 +358,14 @@
                         @ViewBag.reasons[17]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonR, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectR, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonS">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeS, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonS, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -315,11 +376,14 @@
                         @ViewBag.reasons[18]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonS, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectS, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonT">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeT, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonT, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -330,11 +394,14 @@
                         @ViewBag.reasons[19]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectT, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 
                 <tr id="reasonU">
+                    <td>
+                        @Html.CheckBoxFor(model => model.judgeU, new { Style = "vertical-align:3px}" })
+                    </td>
                     <td>
                         @Html.LabelFor(model => model.reasonU, htmlAttributes: new { @class = "control-label" })
                     </td>
@@ -345,7 +412,7 @@
                         @ViewBag.reasons[20]
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.reasonU, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.rejectU, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
 

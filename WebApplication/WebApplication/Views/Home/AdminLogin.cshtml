@@ -19,10 +19,10 @@
                 </div>
 
                 <div class="form-group center-block">
-                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label" })
                     <div>
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control input-lg center-block" } })
-                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control input-lg center-block" } })
+                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger text-center center-block" })

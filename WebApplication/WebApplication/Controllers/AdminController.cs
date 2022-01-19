@@ -29,9 +29,6 @@ namespace WebApplication.Controllers
             List<string> reasons = dbmanger.getReasonByporjectId(projectId);
             ViewBag.reasons = reasons;
 
-
-
-
             List<bool> essentialValues = dbmanger.getEssentialValue(projectId);
             //List <string > essentiallabels = new List<string>(){ "試用報告", "給付限制文件","產品圖檔","衛福部許可證"
             //    ,"自費特材療效比較表","健保/自費收載","新進自費衛材售價申請書","自費特材保證切結書","自費收載價格參考"
@@ -40,39 +37,43 @@ namespace WebApplication.Controllers
             List<string> essentiallabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
                               "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",
                               "reasonN", "reasonO", "reasonP", "reasonQ", "reasonR", "reasonS", "reasonT", "reasonU"};
-            List<string> folderName = new List<string>();
+            List<string> notShowFolder = new List<string>();
             for (int i = 0; i < 21; i++)
             {
-                if (essentialValues[i])
+                if (!essentialValues[i])
                 {
                     // && i != 0 && i != 18 && i != 20
-                    folderName.Add(essentiallabels[i]);
+                    notShowFolder.Add(essentiallabels[i]);
                     // System.Diagnostics.Debug.WriteLine(essentiallabels[i]);
                 }
             }
-            ViewBag.folderName = folderName;
+            ViewBag.notShowFolder = notShowFolder;
             //ViewBag.boolValues = essentialValues;
             /* 將理由寫入資料庫 */
-
+            
             return View();
         }
-        //[HttpPost]
-        //public ActionResult checkProject(Reason reason, string projectId) //
-        //{
-        //    List<bool> essentialValues = dbmanger.getEssentialValue(projectId);
-        //    List<string> essentiallabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
-        //                      "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",
-        //                      "reasonN", "reasonO", "reasonP", "reasonQ", "reasonR", "reasonS", "reasonT", "reasonU"};
-        //    List<string> folderName = new List<string>();
-        //    for (int i = 0; i < 21; i++)
-        //    {
-        //        if (essentialValues[i] && i != 0 && i != 18 && i != 20)
-        //        {
-        //            folderName.Add(essentiallabels[i]);
-        //            //System.Diagnostics.Debug.WriteLine(essentiallabels[i]);
-        //        }
-        //    }
-        //    return View();
-        //}
+        [HttpPost]
+        public ActionResult checkProject(Reason reason, string projectId) //
+        {
+            System.Diagnostics.Debug.WriteLine(reason.judgeA);
+            System.Diagnostics.Debug.WriteLine(reason.judgeB);
+            System.Diagnostics.Debug.WriteLine(reason.judgeC);
+            //    List<bool> essentialValues = dbmanger.getEssentialValue(projectId);
+            //    List<string> essentiallabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
+            //                      "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",
+            //                      "reasonN", "reasonO", "reasonP", "reasonQ", "reasonR", "reasonS", "reasonT", "reasonU"};
+            //    List<string> folderName = new List<string>();
+            //    for (int i = 0; i < 21; i++)
+            //    {
+            //        if (essentialValues[i] && i != 0 && i != 18 && i != 20)
+            //        {
+            //            folderName.Add(essentiallabels[i]);
+            //            //System.Diagnostics.Debug.WriteLine(essentiallabels[i]);
+            //        }
+            //    }
+
+            return RedirectToAction("SearchProject", "Admin");
+        }
     }
 }
