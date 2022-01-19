@@ -54,7 +54,7 @@ namespace WebApplication.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult checkProject(Reason reason, string projectId, Judge judge) //
+        public ActionResult checkProject(Reason reason, string projectId, Judge judge)
         {
             System.Diagnostics.Debug.WriteLine(judge.judgeA);
             System.Diagnostics.Debug.WriteLine(judge.judgeB);

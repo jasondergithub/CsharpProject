@@ -196,6 +196,7 @@
     <Content Include="Views\CompanyStaff\Index.cshtml" />
     <Content Include="Views\Shared\Company_Layout.cshtml" />
     <Content Include="Views\HospitalStaff\SearchProject.cshtml" />
+    <Content Include="Views\HospitalStaff\UploadFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

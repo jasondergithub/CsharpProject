@@ -82,7 +82,7 @@ namespace WebApplication.Controllers
 
             checkDBList.CreateList(checkList);
 
-            return View();
+            return RedirectToAction("SearchProject", "CompanyStaff");
         }
         public ActionResult SearchProject()
         {
@@ -146,7 +146,7 @@ namespace WebApplication.Controllers
                 }
             }
             dbmanger.writeReason2DB(folderName, reason, projectId);
-            return View();
+            return RedirectToAction("SearchProject", "CompanyStaff");
         }
 
     }
