@@ -54,11 +54,11 @@ namespace WebApplication.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult checkProject(Reason reason, string projectId) //
+        public ActionResult checkProject(Reason reason, string projectId, Judge judge) //
         {
-            System.Diagnostics.Debug.WriteLine(reason.judgeA);
-            System.Diagnostics.Debug.WriteLine(reason.judgeB);
-            System.Diagnostics.Debug.WriteLine(reason.judgeC);
+            System.Diagnostics.Debug.WriteLine(judge.judgeA);
+            System.Diagnostics.Debug.WriteLine(judge.judgeB);
+            System.Diagnostics.Debug.WriteLine(judge.judgeC);
             //    List<bool> essentialValues = dbmanger.getEssentialValue(projectId);
             //    List<string> essentiallabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
             //                      "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",

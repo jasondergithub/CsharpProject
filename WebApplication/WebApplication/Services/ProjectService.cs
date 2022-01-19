@@ -286,30 +286,28 @@ namespace WebApplication.Services
             string cmdStr = "UPDATE essentialAndReason SET ";
             int i = 0;
             bool writeValue = false;
-            writeValue = true;
-            List<string> essentiallabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
-                              "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",
-                              "reasonN", "reasonO", "reasonP", "reasonQ", "reasonR", "reasonS", "reasonT", "reasonU"};
+            //List<string> essentiallabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
+            //                  "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",
+            //                  "reasonN", "reasonO", "reasonP", "reasonQ", "reasonR", "reasonS", "reasonT", "reasonU"};
 
-            foreach (var reasonName in reasonNames)
-            {
-                System.Diagnostics.Debug.WriteLine(reasonName);
-                cmdStr = cmdStr + reasonName + '=' + '@' + reasonName + ',';
-
-            }
-                
-
-            //foreach (PropertyInfo prop in typeof(Reason).GetProperties())
+            //foreach (var reasonName in reasonNames)
             //{
-            //    //System.Diagnostics.Debug.WriteLine(prop.GetValue(reasons));
-            //    //System.Diagnostics.Debug.WriteLine(prop.Name);
-            //    if (prop.GetValue(reasons) != null)
-            //    {       //cmdStr = cmdStr + prop.Name + '='+ prop.GetValue(reasons) + ',';
-            //        cmdStr = cmdStr + reasonNames[i] + '=' + '@' + reasonNames[i] + ',';
-            //        writeValue = true;
-            //    }
-            //    i++;
+            //    System.Diagnostics.Debug.WriteLine(reasonName);
+            //    cmdStr = cmdStr + reasonName + '=' + '@' + reasonName + ',';
+
             //}
+            foreach (PropertyInfo prop in typeof(Reason).GetProperties())
+            {
+                //System.Diagnostics.Debug.WriteLine(prop.GetValue(reasons));
+                //System.Diagnostics.Debug.WriteLine(prop.Name);
+                if (prop.GetValue(reasons) != null)
+                {       //cmdStr = cmdStr + prop.Name + '='+ prop.GetValue(reasons) + ',';
+                    cmdStr = cmdStr + prop.Name + '=' + '@' + prop.Name + ',';
+                    writeValue = true;
+                }
+                
+            }
+            //System.Diagnostics.Debug.WriteLine(cmdStr);
             if (writeValue)
             {
                 cmdStr = cmdStr.TrimEnd(',')+' ';
@@ -321,12 +319,11 @@ namespace WebApplication.Services
                 i = 0;
                 foreach (PropertyInfo prop in typeof(Reason).GetProperties())
                 {
-                    if (prop.GetValue(reasons) != null && prop.GetValue(reasons))
+                    //System.Diagnostics.Debug.WriteLine("測試2："+prop.GetValue(reasons));
+                    if (prop.GetValue(reasons) != null)
                     {
                         cmd.Parameters.Add(new SqlParameter("@" + reasonNames[i++], prop.GetValue(reasons)));
-                        System.Diagnostics.Debug.WriteLine(prop.GetValue(reasons));
                     }
-                        
 
                 }
                 cmd.Parameters.Add(new SqlParameter("@projectId", projectId));

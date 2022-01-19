@@ -8,27 +8,7 @@ namespace WebApplication.Models
 {
     public class Reason
     {
-        public bool judgeA { get; set; }
-        public bool judgeB { get; set; }
-        public bool judgeC { get; set; }
-        public bool judgeD { get; set; }
-        public bool judgeE { get; set; }
-        public bool judgeF { get; set; }
-        public bool judgeG { get; set; }
-        public bool judgeH { get; set; }
-        public bool judgeI { get; set; }
-        public bool judgeJ { get; set; }
-        public bool judgeK { get; set; }
-        public bool judgeL { get; set; }
-        public bool judgeM { get; set; }
-        public bool judgeN { get; set; }
-        public bool judgeO { get; set; }
-        public bool judgeP { get; set; }
-        public bool judgeQ { get; set; }
-        public bool judgeR { get; set; }
-        public bool judgeS { get; set; }
-        public bool judgeT { get; set; }
-        public bool judgeU { get; set; }
+
         [DisplayName("試用報告")]
         public string reasonA { get; set; }
         [DisplayName("給付限制文件")]
@@ -72,28 +52,7 @@ namespace WebApplication.Models
         [DisplayName("User理由")]
         public string reasonU { get; set; }
 
-        public string rejectA { get; set; }
-        public string rejectB { get; set; }
-        public string rejectC { get; set; }
-        public string rejectD { get; set; }
-        public string rejectE { get; set; }
-        public string rejectF { get; set; }
-        public string rejectG { get; set; }
-        public string rejectH { get; set; }
-        public string rejectI { get; set; }
-        public string rejectJ { get; set; }
-        public string rejectK { get; set; }
-        public string rejectL { get; set; }
-        public string rejectM { get; set; }
 
-        public string rejectN { get; set; }
-        public string rejectO { get; set; }
-        public string rejectP { get; set; }
-        public string rejectQ { get; set; }
-        public string rejectR { get; set; }
-        public string rejectS { get; set; }
-        public string rejectT { get; set; }
-        public string rejectU { get; set; }
     }
 
 }
