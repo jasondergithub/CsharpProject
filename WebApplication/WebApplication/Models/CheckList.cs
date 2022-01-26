@@ -59,6 +59,21 @@ namespace WebApplication.Models
         public string ten_3 { get; set; }
         /* 清楚圖檔 */
         public string eleven { get; set; }
+        /* 配合使用儀器備 */
+        [DisplayName("是否需配合使用儀器設備")]
+        public string twelve { get; set; }
+        [DisplayName("請三擇一")]
+        public string sub_twelve { get; set; }
+        [DisplayName("儀器名稱")]
+        public string twelve_1 { get; set; }
+        [DisplayName("儀器廠牌")]
+        public string twelve_2 { get; set; }
+        [DisplayName("儀器名稱")]
+        public string twelve_3 { get; set; }
+        [DisplayName("儀器廠牌")]
+        public string twelve_4 { get; set; }
+        [DisplayName("請三擇一")]
+        public string twelve_5 { get; set; }
         /* 試用報告 */
         public string thirteen { get; set; }
         /* 審議資格簽核單 */

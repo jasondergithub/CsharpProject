@@ -20,7 +20,6 @@ namespace WebApplication.Models
         public string rejectK { get; set; }
         public string rejectL { get; set; }
         public string rejectM { get; set; }
-
         public string rejectN { get; set; }
         public string rejectO { get; set; }
         public string rejectP { get; set; }

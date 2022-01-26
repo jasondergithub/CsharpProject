@@ -75,6 +75,13 @@ namespace WebApplication.Controllers
             checkList.ten_2 = checklist.checklisttest.ten_2;
             checkList.ten_3 = checklist.checklisttest.ten_3;
             checkList.eleven = "清楚圖檔";
+            checkList.twelve = checklist.checklisttest.twelve;
+            checkList.sub_twelve = checklist.checklisttest.sub_twelve;
+            checkList.twelve_1 = checklist.checklisttest.twelve_1;
+            checkList.twelve_2 = checklist.checklisttest.twelve_2;
+            checkList.twelve_3 = checklist.checklisttest.twelve_3;
+            checkList.twelve_4 = checklist.checklisttest.twelve_4;
+            checkList.twelve_5 = checklist.checklisttest.twelve_5;
             checkList.thirteen = "試用報告";
             checkList.fourteen = "審議資格簽核單";
             checkList.fifteen = "User理由";

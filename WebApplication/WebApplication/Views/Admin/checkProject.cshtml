@@ -8,6 +8,7 @@
 <script type="text/javascript">
     function showEssentialFile() {
         var folders = @Html.Raw(Json.Encode(@ViewBag.notShowFolder));
+        console.log(folders)
         for (let i = 0; i < folders.length; i++)
         {
             var tmp = document.getElementById(folders[i]).getElementsByClassName("control-label")[0]
@@ -46,7 +47,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonA, htmlAttributes: new { @class = "control-label"})
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[0]
@@ -64,7 +65,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonB, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                       @* <input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[1]
@@ -82,7 +83,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonC, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[2]
@@ -100,7 +101,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonD, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[3]
@@ -118,7 +119,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonE, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[4]
@@ -136,7 +137,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonF, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[5]
@@ -154,7 +155,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonG, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[6]
@@ -172,7 +173,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonH, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[7]
@@ -190,7 +191,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonI, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[8]
@@ -208,7 +209,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonJ, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[9]
@@ -226,7 +227,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonK, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[10]
@@ -244,7 +245,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonL, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[11]
@@ -262,7 +263,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonM, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[12]
@@ -280,7 +281,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonN, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[13]
@@ -298,7 +299,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonO, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[14]
@@ -316,7 +317,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonP, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[15]
@@ -334,7 +335,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonQ, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[16]
@@ -352,7 +353,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonR, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[17]
@@ -370,7 +371,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonS, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[18]
@@ -388,7 +389,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonT, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[19]
@@ -406,7 +407,7 @@
                         @Html.LabelFor(model => model.whyNoFile.reasonU, htmlAttributes: new { @class = "control-label" })
                     </td>
                     <td>
-                        <input type="file" name="photos" />
+                        @*<input type="file" name="photos" />*@
                     </td>
                     <td>
                         @ViewBag.reasons[20]
@@ -424,11 +425,11 @@
 
     <div class="form-group">
         <div class="col-md-offset-4 col-md-8">
-            <input type="submit" value="送出修改" name="Judge" class="btn btn-primary" style="width:100px; height:50px" />
+            <input type="submit" value="送出修改" name="action" class="btn btn-primary" style="width:100px; height:50px" />
             &nbsp&nbsp&nbsp&nbsp
-            <input type="submit" value="通過" name="Pass" class="btn btn-success" style="width:100px; height:50px" />
+            <input type="submit" value="審核通過" name="action" class="btn btn-success" style="width:100px; height:50px" />
             &nbsp&nbsp&nbsp&nbsp
-            <input type="submit" value="不通過" name="notPass" class="btn btn-danger" style="width:100px; height:50px" />
+            <input type="submit" value="審核不通過" name="action" class="btn btn-danger" style="width:100px; height:50px" />
         </div>
     </div>
 

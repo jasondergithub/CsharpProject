@@ -134,6 +134,7 @@
     <Compile Include="Models\Reason.cs" />
     <Compile Include="Models\Reject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdminDBService.cs" />
     <Compile Include="Services\CheckDBList.cs" />
     <Compile Include="Services\createDirectory.cs" />
     <Compile Include="Services\MembersDBService.cs" />

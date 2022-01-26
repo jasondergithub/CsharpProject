@@ -6,13 +6,13 @@
 
 <script type="text/javascript">
 
-    function showStuff1(radio) {   
+    function showStuff1(radio) {
         /*var tmp1 = document.getElementById("checklisttest_two_1").required = true*/
         if (radio.checked == true) {
             document.getElementById("健保給付").style.display = 'none'
             document.getElementById("非健保給付(自費)").style.display = 'none'
             document.getElementById("內含").style.display = 'none'
-            
+
             var tmp = document.getElementsByClassName("sub_three_six")
             //console.log(tmp)
             for (var i = 0; i < tmp.length; i++) {
@@ -103,7 +103,54 @@
                 document.getElementById("checklisttest_ten_2").required = true
                 document.getElementById("checklisttest_ten_3").required = true
             }
+        }
+    }
+    function showStuff4(radio) {
+        
+        if (radio.checked == true) {
+            document.getElementById("sub_twelve").style.display = 'none'
+            document.getElementById("已採購").style.display = 'none'
+            document.getElementById("無須採購，廠商免費借用").style.display = 'none'
+            document.getElementById("尚未採購，規劃獲得方式").style.display = 'none'
+            var tmp = document.getElementsByClassName("twelve")
+            for (var i = 0; i < tmp.length; i++) {
+                tmp[i].checked = false
+            }
 
+            console.log(document.getElementById("sub_twelve"))
+            if (radio.value == "需配合使用儀器設備") {
+                document.getElementById("sub_twelve").style.display = 'block'
+            }
+        }
+    }
+    function showStuff5(radio) {
+        if (radio.checked == true) {
+            document.getElementById("已採購").style.display = 'none'
+            document.getElementById("無須採購，廠商免費借用").style.display = 'none'
+            document.getElementById("尚未採購，規劃獲得方式").style.display = 'none'
+            //var tmp = document.querySelectorAll(".sub_twelve > input")
+
+            var tmp = document.getElementsByClassName("sub_twelve")
+            for (var i = 0; i < tmp.length; i++) {
+                tmp[i].checked = false
+            }
+            console.log(tmp);
+            for (var i = 0; i < tmp.length; i++) {
+                tmp[i].required = false
+            }
+            document.getElementById(radio.value).style.display = 'block'
+            if (radio.value == "已採購") {             
+                document.getElementById("checklisttest_twelve_1").required = true
+                document.getElementById("checklisttest_twelve_1").value = ""
+                document.getElementById("checklisttest_twelve_2").required = true
+                document.getElementById("checklisttest_twelve_2").value = ""
+            }
+            else if (radio.value == "無須採購，廠商免費借用") {
+                document.getElementById("checklisttest_twelve_3").required = true
+                document.getElementById("checklisttest_twelve_3").value = ""
+                document.getElementById("checklisttest_twelve_4").required = true
+                document.getElementById("checklisttest_twelve_4").value = ""
+            }
         }
     }
 </script>
@@ -113,6 +160,7 @@
 {
     @Html.AntiForgeryToken()
 
+    <h1>專案表格</h1>
     <div class="form-horizontal">
         <h4>CheckListViewModel</h4>
         <hr />
@@ -240,6 +288,57 @@
             @Html.EditorFor(model => model.checklisttest.ten_3, new { htmlAttributes = new { @class = "form-control" } })
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.checklisttest.twelve, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.twelve, "需配合使用儀器設備", htmlAttributes: new { @onchange = "showStuff4(this)" }) 是
+            </label>
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.twelve, "不需配合使用儀器設備", htmlAttributes: new { @onchange = "showStuff4(this)" }) 否
+            </label>
+        </div>
+
+        <div class="form-group" style="display:none" id="sub_twelve">
+            @Html.LabelFor(model => model.checklisttest.sub_twelve, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.sub_twelve, "已採購", htmlAttributes: new { @class= "twelve", @onchange = "showStuff5(this)" }) 已採購
+            </label>
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.sub_twelve, "無須採購，廠商免費借用", htmlAttributes: new { @class = "twelve", @onchange = "showStuff5(this)" }) 無須採購，廠商免費借用
+            </label>
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.sub_twelve, "尚未採購，規劃獲得方式", htmlAttributes: new { @class = "twelve", @onchange = "showStuff5(this)" }) 尚未採購，規劃獲得方式
+            </label>
+        </div>
+
+        <div class=" form-group" style="display:none" id="已採購">
+            @Html.LabelFor(model => model.checklisttest.twelve_1, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.checklisttest.twelve_1, new { htmlAttributes = new { @class = "form-control" } })
+            <br />
+            @Html.LabelFor(model => model.checklisttest.twelve_2, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.checklisttest.twelve_2, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class=" form-group" style="display:none" id="無須採購，廠商免費借用">
+            @Html.LabelFor(model => model.checklisttest.twelve_3, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.checklisttest.twelve_3, new { htmlAttributes = new { @class = "form-control" } })
+            <br />
+            @Html.LabelFor(model => model.checklisttest.twelve_4, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.checklisttest.twelve_4, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class=" form-group sub_twelve" style="display:none" id="尚未採購，規劃獲得方式">
+            @Html.LabelFor(model => model.checklisttest.twelve_5, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.twelve_5, "租賃", htmlAttributes: new { @class = "sub_twelve" }) 租賃
+            </label>
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.twelve_5, "編列預算採購", htmlAttributes: new { @class = "sub_twelve" }) 編列預算採購
+            </label>
+            <label class="btn">
+                @Html.RadioButtonFor(model => model.checklisttest.twelve_5, "已併耗材購案", htmlAttributes: new { @class = "sub_twelve" }) 已併耗材購案
+            </label>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -250,7 +349,7 @@
 }
 
 @*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
 
 

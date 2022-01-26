@@ -9,9 +9,28 @@ using WebApplication.Services;
 
 namespace WebApplication.Controllers
 {
+    //public class MultiButtonAttribute : ActionNameSelectorAttribute
+    //{
+    //    public string Name { get; set; }
+    //    public MultiButtonAttribute(string name)
+    //    {
+    //        this.Name = name;
+    //    }
+    //    public override bool IsValidName(ControllerContext controllerContext,
+    //        string actionName, System.Reflection.MethodInfo methodInfo)
+    //    {
+    //        if (string.IsNullOrEmpty(this.Name))
+    //        {
+    //            return false;
+    //        }
+    //        return controllerContext.HttpContext.Request.Form.AllKeys.Contains(this.Name);
+    //    }
+    //}
     public class AdminController : Controller
     {
         private readonly ProjectService dbmanger = new ProjectService();
+        private readonly AdminDBService AdminDBmanger = new AdminDBService();
+
         public ActionResult Index()
         {
             return View();
@@ -54,26 +73,44 @@ namespace WebApplication.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult checkProject(Reason reason, string projectId, Judge judge)
+        //[ActionName("Judge")]
+        public ActionResult checkProject(string projectId, string action, ReasonViewModel judge)
         {
-            System.Diagnostics.Debug.WriteLine(judge.judgeA);
-            System.Diagnostics.Debug.WriteLine(judge.judgeB);
-            System.Diagnostics.Debug.WriteLine(judge.judgeC);
-            //    List<bool> essentialValues = dbmanger.getEssentialValue(projectId);
-            //    List<string> essentiallabels = new List<string>() {"reasonA", "reasonB", "reasonC", "reasonD", "reasonE",
-            //                      "reasonF", "reasonG", "reasonH", "reasonI", "reasonJ", "reasonK", "reasonL", "reasonM",
-            //                      "reasonN", "reasonO", "reasonP", "reasonQ", "reasonR", "reasonS", "reasonT", "reasonU"};
-            //    List<string> folderName = new List<string>();
-            //    for (int i = 0; i < 21; i++)
-            //    {
-            //        if (essentialValues[i] && i != 0 && i != 18 && i != 20)
-            //        {
-            //            folderName.Add(essentiallabels[i]);
-            //            //System.Diagnostics.Debug.WriteLine(essentiallabels[i]);
-            //        }
-            //    }
+            if (action=="送出修改")
+            {
+                System.Diagnostics.Debug.WriteLine("Judge");
+                AdminDBmanger.writeModifyStatus(projectId, judge.judgeBox);
+            }
+            else if (action=="審核通過")
+                System.Diagnostics.Debug.WriteLine("通過");
+            else if (action == "審核不通過")
+                System.Diagnostics.Debug.WriteLine("不通過");
 
             return RedirectToAction("SearchProject", "Admin");
         }
+        //[HttpPost]
+        //[ActionName("Pass")]
+        //public ActionResult Pass(string projectId, ReasonViewModel judge)
+        //{
+        //    System.Diagnostics.Debug.WriteLine(judge.judgeBox.judgeA);
+        //    System.Diagnostics.Debug.WriteLine(judge.judgeBox.judgeB);
+        //    System.Diagnostics.Debug.WriteLine(judge.judgeBox.judgeC);
+        //    System.Diagnostics.Debug.WriteLine(projectId);
+        //    System.Diagnostics.Debug.WriteLine("Pass");
+        //    return RedirectToAction("SearchProject", "Admin");
+        //}
+        //[HttpPost]
+        //[ActionName("notPass")]
+        //public ActionResult notPass(string projectId, Judge judge)
+        //{
+        //    System.Diagnostics.Debug.WriteLine(judge.judgeA);
+        //    System.Diagnostics.Debug.WriteLine(judge.judgeB);
+        //    System.Diagnostics.Debug.WriteLine(judge.judgeC);
+        //    System.Diagnostics.Debug.WriteLine(projectId);
+        //    System.Diagnostics.Debug.WriteLine("not Pass");
+        //    return RedirectToAction("SearchProject", "Admin");
+        //}
+        
+
     }
 }
